@@ -30,7 +30,7 @@ export default function SiteFooter() {
             </h3>
 
             <p className="mx-auto mt-3 max-w-2xl text-neutral-600">
-              {t.footer.about}
+              {t.footer.about2}
             </p>
 
             <a
@@ -58,7 +58,7 @@ export default function SiteFooter() {
             <FooterCol
               title={lang === "en" ? "Quick Links" : "Hızlı Linkler"}
               links={[
-                { label: lang === "en" ? "Linkler" : "Linkler", href: "links" },
+                { label: lang === "en" ? "Links" : "Linkler", href: "links" },
                 { label: lang === "en" ? "Media Kit" : "Medya kiti", href: "mediakit" },
               ]}
             />
@@ -71,12 +71,14 @@ export default function SiteFooter() {
               ]}
             />
             <FooterCol
-              title={lang === "en" ? "Utility Pages" : "Yardımcı Sayfalar"}
-              links={[
-                { label: lang === "en" ? "License" : "Lisans", href: "/license" },
-               
-              ]}
-            />
+  title={lang === "en" ? "Legal" : "Yasal"} // Başlığı 'Utility' yerine 'Legal' veya 'Yasal' yapabilirsin
+  links={[
+    { 
+      label: lang === "en" ? "Legal & Disclaimer" : "Yasal & Sorumluluk Reddi", 
+      href: "/legal" // Linki '/legal' olarak değiştiriyoruz
+    },
+  ]}
+/>
           </div>
 
           {/* === ALT SATIR === */}

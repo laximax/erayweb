@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useLang } from "../components/LangProvider";
 
-// Scrollspy sadece tek sayfa bölümleri için.
-// FAQ ve MediaKit artık ayrı sayfa (/links, /mediakit)
 const SECTIONS = ["benefits", "testimonials"] as const;
 type Sec = (typeof SECTIONS)[number];
 
@@ -14,13 +12,13 @@ export default function TopNavPill() {
   const pathname = usePathname();
   const { lang, setLang, t } = useLang();
 
-  // /contact veya /links veya /mediakit sayfalarında "Back To Home" gösterelim
   const isStandalone =
     pathname?.startsWith("/contact") ||
     pathname?.startsWith("/links") ||
     pathname?.startsWith("/mediakit");
 
   const [active, setActive] = useState<Sec | null>(null);
+  
   useEffect(() => {
     if (isStandalone) return;
     const ios: IntersectionObserver[] = [];
@@ -39,15 +37,27 @@ export default function TopNavPill() {
     return () => ios.forEach((o) => o.disconnect());
   }, [isStandalone]);
 
+  // Whitespace-nowrap ekleyerek mobilde metinlerin alt satıra düşmesini engelledik
   const linkCls = (id: Sec) =>
-    `transition ${
+    `transition whitespace-nowrap ${
       active === id ? "text-white" : "text-neutral-300 hover:text-white"
     }`;
 
   return (
-    <div className="fixed left-1/2 top-4 z-50 -translate-x-1/2">
-      <nav className="flex items-center gap-8 rounded-full bg-black/90 backdrop-blur-sm px-7 py-3 text-[15px] shadow-lg ring-1 ring-black/10">
-        <Link href="/" className="font-semibold text-white">
+    // Mobilde genişliği kısıtlayıp ortaladık
+    <div className="fixed left-1/2 top-4 z-50 w-full max-w-[95%] -translate-x-1/2 sm:w-auto sm:max-w-none">
+      <nav 
+        className="
+          flex items-center gap-6 sm:gap-8 
+          rounded-full bg-black/90 backdrop-blur-sm 
+          px-5 py-3 sm:px-7 
+          text-[14px] sm:text-[15px] 
+          shadow-lg ring-1 ring-black/10
+          overflow-x-auto no-scrollbar
+        "
+      >
+        {/* Logo */}
+        <Link href="/" className="font-semibold text-white shrink-0">
           {t.brand}
           <span className="align-super text-[10px] opacity-70">®</span>
         </Link>
@@ -55,7 +65,7 @@ export default function TopNavPill() {
         {isStandalone ? (
           <Link
             href="/"
-            className="ml-1 rounded-full bg-white/10 px-3 py-1.5 text-white transition hover:bg-white/15"
+            className="ml-auto sm:ml-1 shrink-0 rounded-full bg-white/10 px-3 py-1.5 text-white transition hover:bg-white/15 whitespace-nowrap"
           >
             {t.nav.back}
           </Link>
@@ -69,40 +79,37 @@ export default function TopNavPill() {
             </a>
             <Link
               href="/links"
-              className="text-neutral-300 transition hover:text-white"
+              className="text-neutral-300 transition hover:text-white whitespace-nowrap"
             >
               {t.nav.faq}
-              
             </Link>
 
-            {/* 🔥 Yeni MediaKit butonu */}
             <Link
-  href="/mediakit"
-  className="text-neutral-300 transition hover:text-white"
->
-  Media Kit
-</Link>
+              href="/mediakit"
+              className="text-neutral-300 transition hover:text-white whitespace-nowrap"
+            >
+              Media Kit
+            </Link>
 
-<Link
-  href="/contact"
-  className="text-neutral-300 transition hover:text-white"
->
-  Contact
-</Link>
-
+            <Link
+              href="/contact"
+              className="text-neutral-300 transition hover:text-white whitespace-nowrap"
+            >
+              Contact
+            </Link>
           </>
         )}
 
-        {/* Dil butonları (her sayfada kalsın) */}
+        {/* Dil Butonları */}
         <div
-          className="ml-1 flex items-center gap-1 rounded-full bg-white/10 p-1 text-xs"
+          className="ml-auto sm:ml-1 flex shrink-0 items-center gap-1 rounded-full bg-white/10 p-1 text-xs"
           role="group"
           aria-label="Language switcher"
         >
           <button
             type="button"
             onClick={() => setLang("tr")}
-            className={`rounded-full px-2.5 py-1 ${
+            className={`rounded-full px-2.5 py-1 transition ${
               lang === "tr"
                 ? "bg-white text-black"
                 : "text-white/80 hover:text-white"
@@ -113,7 +120,7 @@ export default function TopNavPill() {
           <button
             type="button"
             onClick={() => setLang("en")}
-            className={`rounded-full px-2.5 py-1 ${
+            className={`rounded-full px-2.5 py-1 transition ${
               lang === "en"
                 ? "bg-white text-black"
                 : "text-white/80 hover:text-white"

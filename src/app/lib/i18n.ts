@@ -1,9 +1,15 @@
-// src/lib/i18n.ts
 export type Lang = "tr" | "en";
 
 export type Translations = {
   brand: string;
-  nav: { benefits: string; testimonials: string; faq: string; back: string };
+  nav: {
+    benefits: string;
+    testimonials: string;
+    faq: string;
+    back: string;
+    contact: string;
+    mediakit: string;
+  };
   hero: { title: string; trusted: string };
   benefits: {
     badge: string;
@@ -12,18 +18,35 @@ export type Translations = {
     cards: { title: string; desc: string; tag: string }[];
   };
   testimonials: { badge: string; heading: string; blurb: string };
+
+  linksPage: {
+    tabs: { links: string; social: string; shop: string };
+    items: { website: string; gear: string; presets: string };
+    cta: { open: string; copy: string; copied: string };
+  };
+
   footer: {
     ctaBadge: string;
     ctaTitle: string;
     ctaButton: string;
     about: string;
+    about2: string;
     copy: (year: number) => string;
   };
-  contact: { title: string; desc: string; submit: string };
 
-  // ➕ MediaKit
+  // ✅ YENİ İLETİŞİM SAYFASI İÇİN GÜNCELLENEN ALAN
+  contact: {
+    badge: string;        // İş Birlikleri İçin Açık
+    titlePart1: string;   // Birlikte
+    titlePart2: string;   // Çalışalım
+    desc: string;         // Açıklama metni
+    emailLabel: string;   // E-posta Adresi etiketi
+    copied: string;       // Kopyalandı uyarısı
+    openMail: string;     // Mail uygulamasında aç
+  };
+
+  // MediaKit
   mediakit: {
-    // Hero alanı
     name: string;
     verified: string;
     country: string;
@@ -33,7 +56,6 @@ export type Translations = {
     reach: string;
     cta: string;
 
-    // Sarı blok / paketler / işler
     meet: string;
     meetText: string;
     offerTitle: string;
@@ -43,7 +65,6 @@ export type Translations = {
     workTitle: string;
     final: string;
 
-    // ✅ Channels + Statistics + Audience için yeni alanlar
     stats: string;
     last30: string;
     latest10: string;
@@ -66,9 +87,11 @@ export const dict: Record<Lang, Translations> = {
     brand: "ErayTechs",
     nav: {
       benefits: "Collab",
-      testimonials: "Brand reviews",
+      testimonials: "Reviews",
       faq: "Links",
       back: "Back To Home",
+      contact: "Contact",
+      mediakit: "Media Kit",
     },
     hero: {
       title:
@@ -76,48 +99,63 @@ export const dict: Record<Lang, Translations> = {
       trusted: "Trusted by 25,000+ clients",
     },
     benefits: {
-      badge: "Collaboration",
-      heading: "Why work with me?",
-      blurb:
-        "I translate technology into content people understand, trust, and use.",
+      badge: "Partnership Value",
+      heading: "Why partner with me?",
+      blurb: "I bridge the gap between complex tech and consumer trust.",
       cards: [
         {
-          title: "From Complex → Clear",
-          desc: "I turn technical topics into short, simple, and highly digestible content.",
-          tag: "Actionable Tech Insights",
+          title: "Viral Storytelling",
+          desc: "I craft high-retention hooks and narratives that stop the scroll and keep audiences watching.",
+          tag: "High Engagement & Reach",
         },
         {
-          title: "Data-Driven Content",
-          desc: "Every piece is backed by research, trends, search data, and audience behavior.",
-          tag: "Performance-Focused Creation",
+          title: "Trusted Authority",
+          desc: "My audience isn't just watching; they are listening. I built a community that trusts my technical verdict.",
+          tag: "Brand Safety & Trust",
         },
         {
-          title: "Measure. Improve. Repeat.",
-          desc: "Optimization based on analytics, not guesses.",
-          tag: "Data + Testing + Results",
+          title: "Conversion Focused",
+          desc: "Content designed not just for views, but to drive downloads, sales, and real user action.",
+          tag: "ROI & Results",
         },
       ],
     },
     testimonials: {
-      badge: "Brand reviews",
-      heading: "Client Feedback",
-      blurb: "Real words from brands who trusted the work.",
+      badge: "Community Feedback",
+      heading: "Community Love",
+      blurb: "Honest feedback from tech enthusiasts.",
     },
+
+    linksPage: {
+      tabs: { links: "Links", social: "Social", shop: "Shop" },
+      items: {
+        website: "Official Website",
+        gear: "Creator Gear List",
+        presets: "PC Optimize Presets",
+      },
+      cta: { open: "Open", copy: "Copy Link", copied: "Copied!" },
+    },
+
     footer: {
       ctaBadge: "Initiate Your Journey",
       ctaTitle: "Great collaborations begin with a conversation",
       ctaButton: "Get In Touch",
-      about:
-        "I simplify technology for everyone and create content that inspires.",
+      about: "Technology & Digital Content.",
+      about2: "Bridging the gap between complex tech and daily life.",
       copy: (year) => `© ${year} ErayTechs. All rights reserved.`,
     },
+
+    // ✅ ENGLISH TRANSLATIONS FOR NEW CONTACT PAGE
     contact: {
-      title: "Reach Out to Me",
-      desc: "Fill out the form below, and we’ll respond soon!",
-      submit: "Submit",
+      badge: "Available for Collaboration",
+      titlePart1: "Let's Work",
+      titlePart2: "Together.",
+      desc: "Reach out for sponsorships, product reviews, or just to say hello.",
+      emailLabel: "Email Address",
+      copied: "Copied to clipboard!",
+      openMail: "Open in Mail App",
     },
 
-    // MediaKit (EN)
     mediakit: {
       name: "ErayTechs",
       verified: "Verified",
@@ -157,7 +195,6 @@ export const dict: Record<Lang, Translations> = {
       final:
         "Need something specific? Let’s build the right package for your brand.",
 
-      // ✅ new
       stats: "Statistics",
       last30: "Last 30 days",
       latest10: "10 latest posts",
@@ -182,6 +219,8 @@ export const dict: Record<Lang, Translations> = {
       testimonials: "Yorumlar",
       faq: "Bağlantılar",
       back: "Ana Sayfaya Dön",
+      contact: "İletişim",
+      mediakit: "Medya Kiti",
     },
     hero: {
       title:
@@ -189,50 +228,63 @@ export const dict: Record<Lang, Translations> = {
       trusted: "25.000+ müşteri tarafından güveniliyor",
     },
     benefits: {
-      badge: "İş Birliği",
+      badge: "İş Birliği Değeri",
       heading: "Neden benimle çalışmalısın?",
-      blurb:
-        "Teknolojiyi insanların anlayıp güvenerek uyguladığı içeriklere dönüştürüyorum.",
+      blurb: "Karmaşık teknolojiyi, tüketicinin güven duyduğu bir dille anlatıyorum.",
       cards: [
         {
-          title: "Karmaşıktan → Kolaya",
-          desc:
-            "Teknik konuları kısa, anlaşılır ve uygulanabilir içeriklere dönüştürüyorum.",
-          tag: "Uygulanabilir Teknoloji İçgörüleri",
+          title: "Viral Hikaye Anlatımı",
+          desc: "Kaydırmayı durduran kancalar (hooks) ve izleyiciyi videoda tutan akıcı kurgular üretiyorum.",
+          tag: "Yüksek Etkileşim & Erişim",
         },
         {
-          title: "Veri Odaklı İçerik",
-          desc:
-            "Her içerik araştırma, trend analizi ve kullanıcı davranışına dayanır.",
-          tag: "Performans Odaklı Üretim",
+          title: "Güvenilir Otorite",
+          desc: "Kitlem sadece izlemiyor, dinliyor. Teknik önerilerime güvenen sadık bir topluluk inşa ettim.",
+          tag: "Marka Güvenliği & İtibar",
         },
         {
-          title: "Ölç – Geliştir – Tekrarla",
-          desc: "Tahminle değil, analizlerle optimize ediyorum.",
-          tag: "Veri + Test + Sonuç",
+          title: "Dönüşüm Odaklı",
+          desc: "Sadece izlenme (vanity metrics) değil; indirme, satış ve gerçek kullanıcı hareketi getiren içerikler.",
+          tag: "ROI & Gerçek Sonuçlar",
         },
       ],
     },
     testimonials: {
-      badge: "Yorumlar",
-      heading: "Müşteri Geri Bildirimleri",
-      blurb: "İşime güvenen ekiplerin gerçek yorumları.",
+      badge: "Takipçi Yorumları",
+      heading: "Sizden Gelenler",
+      blurb: "Teknoloji tutkunlarının dürüst yorumları.",
     },
+
+    linksPage: {
+      tabs: { links: "Linkler", social: "Sosyal", shop: "Mağaza" },
+      items: {
+        website: "Resmi Web Sitesi",
+        gear: "Ekipman Listem",
+        presets: "PC Hızlandırma Ayarları",
+      },
+      cta: { open: "Aç", copy: "Linki Kopyala", copied: "Kopyalandı!" },
+    },
+
     footer: {
       ctaBadge: "Yolculuğunu Başlat",
       ctaTitle: "Harika işler bir sohbetle başlar",
       ctaButton: "İletişime Geç",
-      about:
-        "Teknolojiyi herkesin anlayacağı hale getiriyor, ilham veren içerikler üretiyorum.",
+      about: "Teknoloji & Dijital İçerik.",
+      about2: "Karmaşık teknolojiyi günlük yaşamla buluşturuyoruz.",
       copy: (year) => `© ${year} ErayTechs. Tüm hakları saklıdır.`,
     },
+
+    // ✅ YENİ İLETİŞİM SAYFASI İÇİN TÜRKÇE ÇEVİRİLER
     contact: {
-      title: "Bizimle İletişime Geç",
-      desc: "Formu doldur; en kısa sürede dönüş yapacağız!",
-      submit: "Gönder",
+      badge: "İş Birlikleri İçin Açık",
+      titlePart1: "Birlikte",
+      titlePart2: "Çalışalım.",
+      desc: "Sponsorluk, ürün incelemeleri veya sadece merhaba demek için ulaşın.",
+      emailLabel: "E-posta Adresi",
+      copied: "Panoya kopyalandı!",
+      openMail: "Mail Uygulamasında Aç",
     },
 
-    // MediaKit (TR)
     mediakit: {
       name: "ErayTechs",
       verified: "Onaylı",
@@ -258,13 +310,16 @@ export const dict: Record<Lang, Translations> = {
       },
       pack3: {
         title: "Özel İş Birliği",
-        items: ["Kurgulama & metin yazımı", "Çoklu platform yayını", "Detaylı raporlama"],
+        items: [
+          "Kurgulama & metin yazımı",
+          "Çoklu platform yayını",
+          "Detaylı raporlama",
+        ],
       },
       workTitle: "Seçili İşler",
       final:
         "Özel bir ihtiyacın mı var? Markana uygun paketi birlikte oluşturalım.",
 
-      // ✅ yeni
       stats: "İstatistikler",
       last30: "Son 30 gün",
       latest10: "Son 10 post",
