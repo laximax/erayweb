@@ -9,6 +9,7 @@ export type Translations = {
     back: string;
     contact: string;
     mediakit: string;
+    prompts: string;
   };
   hero: { title: string; trusted: string };
   benefits: {
@@ -92,6 +93,7 @@ export const dict: Record<Lang, Translations> = {
       back: "Home Page",
       contact: "Contact",
       mediakit: "Media Kit",
+      prompts: "Prompts",
     },
     hero: {
       title:
@@ -221,6 +223,7 @@ export const dict: Record<Lang, Translations> = {
       back: "Ana Sayfaya Dön",
       contact: "İletişim",
       mediakit: "Medya Kiti",
+      prompts: "Promptlar",
     },
     hero: {
       title:

@@ -474,7 +474,7 @@ function MediaKitFooter() {
 
 export default function MediaKitPage() {
   return (
-      <main className="min-h-dvh bg-neutral-100 pb-16 pt-20 sm:pt-24">
+      <main className="min-h-dvh bg-neutral-100 pt-20 sm:pt-24">
       <TopNavPill />
       <CreatorHero />
       <ChannelsSection />

@@ -1,5 +1,8 @@
-import React, { useState, useMemo } from 'react';
-import { Search, Copy, Check, Filter } from 'lucide-react';
+"use client";
+
+import Image from "next/image";
+import React, { useMemo, useState } from 'react';
+import { Check, Copy, Filter, Search } from 'lucide-react';
 
 // Örnek Veri Seti
 const INITIAL_PROMPTS = [
@@ -80,7 +83,7 @@ export default function PromptsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F9F9F9] text-gray-900 pb-20 font-sans">
+    <div className="bg-[#F9F9F9] text-gray-900 pb-20 font-sans">
       
       {/* HERO */}
       <div className="pt-24 pb-12 px-6 text-center bg-white border-b border-gray-100">
@@ -153,10 +156,13 @@ export default function PromptsPage() {
                 className="break-inside-avoid group relative bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="relative aspect-auto overflow-hidden bg-gray-100">
-                  <img 
-                    src={item.image} 
-                    alt={item.title} 
-                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                 <Image
+                    src={item.image}
+                    alt={item.title}
+                    width={800}
+                    height={600}
+                    className="h-auto w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />
                   <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <button 

@@ -16,7 +16,8 @@ export default function TopNavPill() {
   const isStandalone =
     pathname?.startsWith("/contact") ||
     pathname?.startsWith("/links") ||
-    pathname?.startsWith("/mediakit");
+    pathname?.startsWith("/mediakit") ||
+     pathname?.startsWith("/prompts");
 
   const [active, setActive] = useState<Sec | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -77,7 +78,7 @@ export default function TopNavPill() {
     </div>
   );
 const brandLink = (
-    <Link href="/" className="shrink-0 font-semibold text-white whitespace-nowrap">
+      <Link href="/" className="shrink-0 whitespace-nowrap font-semibold text-white">
       {t.brand}
       <span className="align-super text-[10px] opacity-70">®</span>
     </Link>
@@ -109,12 +110,28 @@ const brandLink = (
         
 
               <Link
-                href="/mediakit"
-                onClick={handleNavClick}
-                className="whitespace-nowrap text-neutral-300 transition hover:text-white"
-              >
-                Media Kit
-              </Link>
+              href="/mediakit"
+              onClick={handleNavClick}
+              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+            >
+              {t.nav.mediakit}
+            </Link>
+
+            <Link
+              href="/prompts"
+              onClick={handleNavClick}
+              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+            >
+              {t.nav.prompts}
+            </Link>
+
+            <Link
+              href="/contact"
+              onClick={handleNavClick}
+              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+            >
+              {t.nav.contact}
+            </Link>
 
                <div className="ml-auto w-full min-[420px]:w-auto">{languageSwitcher}</div>
           </div>
@@ -158,7 +175,15 @@ const brandLink = (
                   onClick={handleNavClick}
                   className="whitespace-nowrap text-neutral-300 transition hover:text-white"
                 >
-                  Media Kit
+                   {t.nav.mediakit}
+                </Link>
+
+                <Link
+                  href="/prompts"
+                  onClick={handleNavClick}
+                  className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+                >
+                  {t.nav.prompts}
                 </Link>
 
                 <Link
@@ -166,7 +191,7 @@ const brandLink = (
                   onClick={handleNavClick}
                   className="whitespace-nowrap text-neutral-300 transition hover:text-white"
                 >
-                  Contact
+                  {t.nav.contact}
                 </Link>
               </div>
 
@@ -195,7 +220,7 @@ const brandLink = (
 
         {/* 2. Linkler (Ortada / Solda Logo'nun yanında) */}
         {isStandalone ? (
-            // Eğer standalone sayfalardaysak Back butonu
+             <div className="flex items-center gap-4 lg:gap-6">
             <Link
               href="/"
               onClick={handleNavClick}
@@ -203,6 +228,25 @@ const brandLink = (
             >
               {t.nav.back}
             </Link>
+             <Link
+              href="/mediakit"
+              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+            >
+              {t.nav.mediakit}
+            </Link>
+            <Link
+              href="/prompts"
+              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+            >
+              {t.nav.prompts}
+            </Link>
+            <Link
+              href="/contact"
+              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+            >
+              {t.nav.contact}
+            </Link>
+          </div>
         ) : (
           <div className="flex items-center gap-6 lg:gap-8">
             <a href="#benefits" className={linkCls("benefits")}>
@@ -219,13 +263,19 @@ const brandLink = (
               href="/mediakit"
               className="whitespace-nowrap text-neutral-300 transition hover:text-white"
             >
-              Media Kit
+              {t.nav.mediakit}
+            </Link>
+            <Link
+              href="/prompts"
+              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+            >
+              {t.nav.prompts}
             </Link>
             <Link
               href="/contact"
               className="whitespace-nowrap text-neutral-300 transition hover:text-white"
             >
-              Contact
+              {t.nav.contact}
             </Link>
           </div>
         )}
