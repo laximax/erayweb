@@ -55,7 +55,7 @@ export default function BenefitsSection() {
   return (
     <section
       id="benefits"
-      className="flex min-h-screen items-center justify-center bg-neutral-100 py-20 sm:py-24 scroll-mt-28"
+      className="flex min-h-screen items-center justify-center bg-neutral-100 py-16 sm:py-24 lg:py-28 scroll-mt-28"
     >
       <Container>
         <div className="mx-auto text-center">
@@ -77,7 +77,7 @@ export default function BenefitsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl"
+             className="mt-6 text-[clamp(2.25rem,5vw,3.5rem)] font-semibold tracking-tight sm:text-5xl md:text-6xl"
           >
             {heading}
           </motion.h2>
@@ -100,7 +100,7 @@ export default function BenefitsSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            className="mt-14 grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3"
           >
             {items.map((it, i) => (
               <motion.article

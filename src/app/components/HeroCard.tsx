@@ -5,11 +5,11 @@ import Container from "./Container";
 import { useLang } from "../components/LangProvider";
 
 export default function HeroCard() {
-  const { t, lang } = useLang();
+  const { lang } = useLang();
 
   return (
     // Mobilde üst boşluğu biraz kıstık (mt-28), büyük ekranda açtık
-    <section className="mt-28 sm:mt-32 mb-12 sm:mb-16">
+     <section className="mt-24 sm:mt-32 mb-10 sm:mb-16 lg:mb-20">
       <Container>
         {/* Kart Ana Yapısı */}
         <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] bg-neutral-900 shadow-2xl ring-1 ring-white/10">
@@ -36,23 +36,23 @@ export default function HeroCard() {
           <Corner pos="bl" />
 
           {/* === İçerik Grid === */}
-          <div className="relative z-10 grid min-h-[500px] sm:min-h-[600px] lg:min-h-[650px] grid-cols-1 items-center gap-8 p-6 sm:p-10 lg:grid-cols-12 lg:p-14">
+           <div className="relative z-10 grid min-h-[480px] sm:min-h-[600px] lg:min-h-[650px] grid-cols-1 items-center gap-8 p-6 sm:p-10 lg:grid-cols-12 lg:p-14">
             
             {/* Sol Taraf: Büyük Marka İsmi */}
             <div className="flex flex-col justify-center text-center lg:text-left lg:col-span-7">
               <h1 className="leading-none font-bold tracking-tighter text-white">
                 {/* Responsive Font Boyutları */}
-                <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[100px] xl:text-[110px] 2xl:text-[130px]">
+                 <span className="block text-[clamp(2.8rem,9vw,6.5rem)] sm:text-[clamp(3.5rem,7vw,7rem)] lg:text-[clamp(5rem,8vw,100px)] xl:text-[110px] 2xl:text-[130px]">
                   ERAY
                 </span>
-                <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[100px] xl:text-[110px] 2xl:text-[130px] text-transparent bg-clip-text bg-gradient-to-b from-neutral-200 to-neutral-600">
+                <span className="block text-[clamp(2.8rem,9vw,6.5rem)] sm:text-[clamp(3.5rem,7vw,7rem)] lg:text-[clamp(5rem,8vw,100px)] xl:text-[110px] 2xl:text-[130px] text-transparent bg-clip-text bg-gradient-to-b from-neutral-200 to-neutral-600">
                   TECHS
                 </span>
               </h1>
               
-              <p className="mt-4 sm:mt-6 max-w-lg mx-auto lg:mx-0 text-base sm:text-lg lg:text-xl text-neutral-300 font-medium text-shadow-sm">
-                {lang === "en" 
-                  ? "Technology & Digital Content." 
+                <p className="mt-4 sm:mt-6 max-w-2xl mx-auto lg:mx-0 text-base sm:text-lg lg:text-xl text-neutral-300 font-medium text-shadow-sm">
+                {lang === "en"
+                  ? "Technology & Digital Content."
                   : "Teknoloji & Dijital İçerik."}
               </p>
             </div>

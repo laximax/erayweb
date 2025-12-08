@@ -82,7 +82,7 @@ export default function LinksBoard() {
   return (
     <main
       className="
-        relative min-h-screen pb-24 pt-28
+        relative min-h-screen pb-20 pt-24 sm:pb-24 sm:pt-28
         bg-neutral-100
         before:absolute before:inset-0 before:-z-10
         before:bg-[radial-gradient(60%_40%_at_50%_0%,rgba(255,255,255,0.85),rgba(255,255,255,0)_60%)]
@@ -93,11 +93,10 @@ export default function LinksBoard() {
       <TopNavPill />
 
       <Container>
-        <div className="mx-auto w-full max-w-3xl rounded-[28px] bg-white/80 p-6 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] ring-1 ring-black/10 backdrop-blur-sm sm:p-8 lg:p-10">
-          
+         <div className="mx-auto w-full max-w-3xl rounded-[28px] bg-white/80 p-5 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] ring-1 ring-black/10 backdrop-blur-sm sm:p-8 lg:p-10">
           {/* --- PROFIL BLOĞU --- */}
           <div className="mx-auto max-w-md text-center">
-            <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-full ring-4 ring-white shadow-lg aspect-square">
+            <div className="relative mx-auto h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-full ring-4 ring-white shadow-lg aspect-square">
               <Image
                 src="/hero.png" // Logoyu buraya koy
                 alt="ErayTechs"
@@ -108,7 +107,7 @@ export default function LinksBoard() {
               />
             </div>
 
-            <h1 className="mt-4 text-3xl font-semibold text-neutral-900">ErayTechs</h1>
+            <h1 className="mt-4 text-[clamp(1.8rem,4vw,2.2rem)] font-semibold text-neutral-900">ErayTechs</h1>
             <p className="text-sm text-neutral-600">@eraytechs</p>
           </div>
 
@@ -155,17 +154,17 @@ export default function LinksBoard() {
                   href={item.href}
                   target="_blank"
                   className="
-                    group flex items-center justify-between
+                     group flex items-center justify-between gap-3 flex-wrap
                     rounded-2xl border border-neutral-200/70 bg-white/90 p-4
                     shadow-sm ring-1 ring-black/5 backdrop-blur
                     transition
                     hover:-translate-y-[2px] hover:shadow-lg hover:ring-black/10
                   "
                 >
-                  <span className="flex items-center gap-3">
+                   <span className="flex items-center gap-3 min-w-[200px] flex-1">
                     <span
                       className="
-                        flex h-10 w-10 items-center justify-center
+                        flex h-10 w-10 items-center justify-center flex-shrink-0
                         rounded-xl bg-neutral-100 text-neutral-900
                         transition group-hover:bg-black group-hover:text-white
                       "
@@ -181,7 +180,7 @@ export default function LinksBoard() {
                       </span>
                     ) : null}
                   </span>
-                  <span className="text-sm text-neutral-500 transition group-hover:text-neutral-700">
+                  <span className="text-sm text-neutral-500 transition group-hover:text-neutral-700 ml-auto">
                     {t.linksPage?.cta?.open || "Open"}
                   </span>
                 </a>

@@ -7,12 +7,12 @@ export default function LegalPage() {
   const { lang } = useLang();
 
   return (
-    <main className="bg-neutral-50 py-16 sm:py-24">
+    <main className="bg-neutral-50 py-14 sm:py-24">
       <Container>
-        <div className="mx-auto max-w-3xl rounded-[28px] bg-white p-8 shadow-sm ring-1 ring-neutral-200/70 sm:p-12">
+         <div className="mx-auto max-w-3xl rounded-[28px] bg-white p-6 shadow-sm ring-1 ring-neutral-200/70 sm:p-12">
           
           <header className="mb-10 border-b border-neutral-100 pb-8">
-            <h1 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl">
+            <h1 className="text-[clamp(1.6rem,4vw,2.25rem)] font-bold tracking-tight text-neutral-900 sm:text-3xl">
               {lang === "en" ? "Legal Notice & Disclaimer" : "Yasal Bilgilendirme ve Sorumluluk Reddi"}
             </h1>
             <p className="mt-2 text-sm text-neutral-500">

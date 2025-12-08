@@ -59,7 +59,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ ok: true }, { status: 200 });
-  } catch (e) {
+  } catch {
     return NextResponse.json(
       { ok: false, error: "Unexpected error." },
       { status: 500 }

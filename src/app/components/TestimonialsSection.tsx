@@ -115,7 +115,7 @@ export default function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="flex min-h-screen items-center justify-center bg-neutral-50 py-20 sm:py-24 scroll-mt-28"
+      className="flex min-h-screen items-center justify-center bg-neutral-50 py-16 sm:py-24 lg:py-28 scroll-mt-28"
     >
       <Container>
         <div className="mx-auto max-w-6xl text-center">
@@ -136,7 +136,7 @@ export default function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             viewport={{ once: true }}
-            className="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl"
+            className="mt-5 text-[clamp(2.25rem,5vw,3.5rem)] font-semibold tracking-tight sm:text-5xl md:text-6xl"
           >
             {heading}
           </motion.h2>

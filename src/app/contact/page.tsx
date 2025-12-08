@@ -14,7 +14,7 @@ import { Copy, Check, Mail, ArrowUpRight } from "lucide-react";
 
 export default function ContactPage() {
   // useLang hem 'lang' bilgisini hem de 't' çeviri objesini getirir.
-  const { lang, t } = useLang();
+  const { t } = useLang();
   
   const [copied, setCopied] = useState(false);
   const email = "eray@eraytechs.com";
@@ -26,11 +26,11 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center bg-neutral-50 px-4 pt-20 sm:pt-0">
+     <main className="relative flex min-h-screen flex-col items-center justify-center bg-neutral-50 px-4 pt-16 sm:pt-0">
       {/* Arka plan dokusu */}
       <div className="absolute inset-0 h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
-      <div className="relative z-10 w-full max-w-lg text-center">
+       <div className="relative z-10 w-full max-w-xl text-center">
         {/* Üst Badge */}
         <div className="mb-6 animate-fade-in-up">
           <span className="inline-flex items-center rounded-full border border-neutral-200 bg-white/50 px-3 py-1 text-xs font-medium text-neutral-500 backdrop-blur-sm">
@@ -43,19 +43,19 @@ export default function ContactPage() {
         </div>
 
         {/* Ana Başlık */}
-        <h1 className="mb-4 text-4xl font-bold tracking-tight text-neutral-900 sm:text-6xl">
+        <h1 className="mb-4 text-[clamp(2.4rem,6vw,3.5rem)] font-bold tracking-tight text-neutral-900 sm:text-6xl">
           {t.contact.titlePart1} <br />
           <span className="font-serif italic text-neutral-500">
             {t.contact.titlePart2}
           </span>
         </h1>
 
-        <p className="mx-auto mb-10 max-w-sm text-neutral-600 sm:text-lg">
+       <p className="mx-auto mb-10 max-w-xl text-neutral-600 sm:text-lg">
           {t.contact.desc}
         </p>
 
         {/* E-posta Kartı */}
-        <div className="group relative mx-auto mb-8 w-full max-w-sm cursor-pointer" onClick={handleCopy}>
+         <div className="group relative mx-auto mb-8 w-full max-w-md cursor-pointer" onClick={handleCopy}>
           <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-neutral-200 to-neutral-100 opacity-50 blur transition duration-500 group-hover:opacity-100" />
           
           <div className="relative flex items-center justify-between rounded-2xl border border-neutral-200 bg-white p-2 pl-5 shadow-sm transition-all duration-300 hover:shadow-md active:scale-[0.98]">
