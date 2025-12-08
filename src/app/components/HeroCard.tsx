@@ -36,10 +36,10 @@ export default function HeroCard() {
           <Corner pos="bl" />
 
           {/* === İçerik Grid === */}
-           <div className="relative z-10 grid min-h-[480px] sm:min-h-[600px] lg:min-h-[650px] grid-cols-1 items-center gap-8 p-6 sm:p-10 lg:grid-cols-12 lg:p-14">
+           <div className="relative z-10 grid min-h-[480px] sm:min-h-[600px] lg:min-h-[650px] grid-cols-1 items-center gap-6 sm:gap-8 p-6 sm:p-10 lg:grid-cols-12 lg:p-14">
             
             {/* Sol Taraf: Büyük Marka İsmi */}
-            <div className="flex flex-col justify-center text-center lg:text-left lg:col-span-7">
+            <div className="order-1 flex flex-col justify-center text-center lg:order-1 lg:col-span-7 lg:text-left">
               <h1 className="leading-none font-bold tracking-tighter text-white">
                 {/* Responsive Font Boyutları */}
                  <span className="block text-[clamp(2.8rem,9vw,6.5rem)] sm:text-[clamp(3.5rem,7vw,7rem)] lg:text-[clamp(5rem,8vw,100px)] xl:text-[110px] 2xl:text-[130px]">
@@ -50,21 +50,17 @@ export default function HeroCard() {
                 </span>
               </h1>
               
-                <p className="mt-4 sm:mt-6 max-w-2xl mx-auto lg:mx-0 text-base sm:text-lg lg:text-xl text-neutral-300 font-medium text-shadow-sm">
-                {lang === "en"
-                  ? "Technology & Digital Content."
-                  : "Teknoloji & Dijital İçerik."}
-              </p>
+                
             </div>
 
             {/* Sağ Taraf: Sosyal Medya Butonları */}
-            <div className="flex items-end justify-center lg:col-span-5 lg:h-full lg:justify-end lg:pb-4">
+            <div className="order-2 flex items-end justify-center lg:order-3 lg:col-span-5 lg:h-full lg:justify-end lg:pb-4">
               <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
                 
-                <SocialBtn 
-                  href="https://instagram.com/eraytechs" 
-                  icon={Instagram} 
-                  label="Instagram" 
+                <SocialBtn
+                  href="https://instagram.com/eraytechs"
+                  icon={Instagram}
+                  label="Instagram"
                 />
                 
                 <SocialBtn 
@@ -81,6 +77,11 @@ export default function HeroCard() {
 
               </div>
             </div>
+             <p className="order-3 mx-auto max-w-2xl text-center text-base text-neutral-300 text-shadow-sm font-medium sm:text-lg lg:order-2 lg:mx-0 lg:col-span-7 lg:text-left lg:text-xl lg:leading-relaxed lg:mt-4">
+              {lang === "en"
+                ? "Technology & Digital Content."
+                : "Teknoloji & Dijital İçerik."}
+            </p>
 
           </div>
         </div>

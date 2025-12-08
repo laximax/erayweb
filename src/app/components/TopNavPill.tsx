@@ -76,7 +76,12 @@ export default function TopNavPill() {
       </button>
     </div>
   );
-
+const brandLink = (
+    <Link href="/" className="shrink-0 font-semibold text-white whitespace-nowrap">
+      {t.brand}
+      <span className="align-super text-[10px] opacity-70">®</span>
+    </Link>
+  );
   return (
     <div className="fixed left-1/2 top-4 z-50 w-full max-w-[95%] -translate-x-1/2 md:w-auto md:max-w-none">
       {/* ----------------MOBILE NAVIGATION---------------- */}
@@ -89,52 +94,19 @@ export default function TopNavPill() {
           shadow-lg ring-1 ring-black/10
         "
       >
-        <div className="flex items-center gap-3">
-          {/* Logo */}
-          <Link href="/" className="shrink-0 font-semibold text-white">
-            {t.brand}
-            <span className="align-super text-[10px] opacity-70">®</span>
-          </Link>
+         {isStandalone ? (
+          <div className="flex flex-wrap items-center gap-3">
+            {brandLink}
 
-          <button
-            type="button"
-            className="ml-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
-            onClick={() => setMenuOpen((prev) => !prev)}
-            aria-label={menuOpen ? "Close navigation" : "Open navigation"}
-            aria-expanded={menuOpen}
-          >
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-
-        <div
-          className={`mt-3 flex flex-col items-start gap-3 ${
-            menuOpen ? "flex" : "hidden"
-          }`}
-        >
-          {isStandalone ? (
+       
             <Link
               href="/"
               onClick={handleNavClick}
-              className="whitespace-nowrap rounded-full bg-white/10 px-3 py-1.5 text-white transition hover:bg-white/15"
+             className="text-white underline decoration-white/60 underline-offset-4 transition hover:decoration-white"
             >
               {t.nav.back}
             </Link>
-          ) : (
-            <div className="flex flex-col gap-2">
-              <a href="#benefits" className={linkCls("benefits")} onClick={handleNavClick}>
-                {t.nav.benefits}
-              </a>
-              <a href="#testimonials" className={linkCls("testimonials")} onClick={handleNavClick}>
-                {t.nav.testimonials}
-              </a>
-              <Link
-                href="/links"
-                onClick={handleNavClick}
-                className="whitespace-nowrap text-neutral-300 transition hover:text-white"
-              >
-                {t.nav.faq}
-              </Link>
+        
 
               <Link
                 href="/mediakit"
@@ -144,18 +116,65 @@ export default function TopNavPill() {
                 Media Kit
               </Link>
 
-              <Link
-                href="/contact"
-                onClick={handleNavClick}
-                className="whitespace-nowrap text-neutral-300 transition hover:text-white"
-              >
-                Contact
-              </Link>
-            </div>
-          )}
+               <div className="ml-auto w-full min-[420px]:w-auto">{languageSwitcher}</div>
+          </div>
+        ) : (
+          <>
+            <div className="flex items-center gap-3">
+              {/* Logo */}
+              {brandLink}
 
-          <div className="w-full">{languageSwitcher}</div>
-        </div>
+              <button
+                type="button"
+                className="ml-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+                onClick={() => setMenuOpen((prev) => !prev)}
+                aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+                aria-expanded={menuOpen}
+              >
+                {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            </div>
+       
+            <div
+              className={`mt-3 flex flex-col items-start gap-3 ${
+                menuOpen ? "flex" : "hidden"
+              }`}
+            >
+              <div className="flex flex-col gap-2">
+                <a href="#benefits" className={linkCls("benefits")} onClick={handleNavClick}>
+                  {t.nav.benefits}
+                </a>
+                
+                <Link
+                  href="/links"
+                  onClick={handleNavClick}
+                  className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+                >
+                  {t.nav.faq}
+                </Link>
+
+                <Link
+                  href="/mediakit"
+                  onClick={handleNavClick}
+                  className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+                >
+                  Media Kit
+                </Link>
+
+                <Link
+                  href="/contact"
+                  onClick={handleNavClick}
+                  className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+                >
+                  Contact
+                </Link>
+              </div>
+
+              <div className="w-full">{languageSwitcher}</div>
+            </div>
+          </>
+        )}
+         
       </nav>
 
       {/* ----------------DESKTOP & TABLET NAVIGATION---------------- */}
@@ -169,7 +188,7 @@ export default function TopNavPill() {
         "
       >
         {/* 1. Logo (En Solda) */}
-        <Link href="/" className="shrink-0 font-semibold text-white mr-6 lg:mr-8">
+        <Link href="/" className="shrink-0 font-semibold text-white whitespace-nowrap mr-6 lg:mr-8">
           {t.brand}
           <span className="align-super text-[10px] opacity-70">®</span>
         </Link>
@@ -189,9 +208,7 @@ export default function TopNavPill() {
             <a href="#benefits" className={linkCls("benefits")}>
               {t.nav.benefits}
             </a>
-            <a href="#testimonials" className={linkCls("testimonials")}>
-              {t.nav.testimonials}
-            </a>
+          
             <Link
               href="/links"
               className="whitespace-nowrap text-neutral-300 transition hover:text-white"

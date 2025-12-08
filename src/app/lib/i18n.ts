@@ -89,7 +89,7 @@ export const dict: Record<Lang, Translations> = {
       benefits: "Collab",
       testimonials: "Reviews",
       faq: "Links",
-      back: "Back To Home",
+      back: "Home Page",
       contact: "Contact",
       mediakit: "Media Kit",
     },
