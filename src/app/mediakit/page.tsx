@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLang } from "@/app/components/LangProvider";
+import TopNavPill from "../components/TopNavPill";
 
 import { CheckCircle2, MapPin, Languages, Instagram, Music, Youtube, Globe ,FileDown} from "lucide-react";
 
@@ -38,9 +39,9 @@ function CreatorHero() {
         ring-1 ring-black/5
       "
     >
-      <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-10 px-6 sm:px-10 md:flex-row md:items-center md:gap-12">
+       <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-10 px-4 sm:px-8 lg:px-10 md:flex-row md:items-center md:gap-12">
         {/* Sol: Görsel */}
-        <div className="relative shrink-0 overflow-hidden rounded-[32px] ring-4 ring-white shadow-xl w-64 h-64 sm:w-72 sm:h-72 md:w-[320px] md:h-[320px]">
+        <div className="relative shrink-0 overflow-hidden rounded-[32px] ring-4 ring-white shadow-xl w-56 h-56 sm:w-72 sm:h-72 md:w-[320px] md:h-[320px]">
           <Image
             src="/hero.png"
             alt="ErayTechs"
@@ -53,7 +54,7 @@ function CreatorHero() {
 
         {/* Sağ: Bilgiler */}
         <div className="flex-1 text-center md:text-left">
-          <div className="flex flex-col md:flex-row md:items-center md:gap-3 justify-center md:justify-start">
+           <div className="flex flex-col items-center md:flex-row md:items-center md:gap-3 md:justify-start">
             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-neutral-900">
               {t.mediakit.name}
             </h1>
@@ -255,27 +256,35 @@ function ChannelsSection() {
   const avgViewsLabel = tab === "instagram" ? "Avg Reels Views" : "Avg Video Views";
 
   return (
-    <section className="mx-auto mt-12 w-full max-w-6xl px-4 sm:px-6">
-      <h2 className="text-2xl sm:text-3xl font-semibold">Channels</h2>
+    <section className="mx-auto mt-12 w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 className="text-2xl sm:text-3xl font-semibold text-center sm:text-left">Channels</h2>
 
       {/* Tabs */}
-      <div className="mt-4 flex items-center gap-4 border-b border-neutral-200 pb-2">
-        <Tab active={tab === "tiktok"} onClick={() => setTab("tiktok")} icon={<Music className="h-4 w-4" />} label="TikTok" badge={DATA.tiktok.badge} />
-        <Tab active={tab === "instagram"} onClick={() => setTab("instagram")} icon={<Instagram className="h-4 w-4" />} label="Instagram" badge={DATA.instagram.badge} />
-        <Tab active={tab === "youtube"} onClick={() => setTab("youtube")} icon={<Youtube className="h-4 w-4" />} label="YouTube" badge={DATA.youtube.badge} />
-        <a href={d.url} target="_blank" className="ml-auto inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm hover:bg-neutral-100">
-          Go to {cap(tab)} ↗
-        </a>
-        <a
-      href={MEDIA_KIT_PDF_PATH}
-      download
-      className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50"
-      aria-label="Download Media Kit as PDF"
-    >
-      <FileDown className="h-4 w-4" />
-      <span className="hidden sm:inline">Download Media Kit (PDF)</span>
-      <span className="sm:hidden">Media Kit PDF</span>
-    </a>
+     <div className="mt-4 flex flex-wrap items-center gap-3 border-b border-neutral-200 pb-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <Tab active={tab === "tiktok"} onClick={() => setTab("tiktok")} icon={<Music className="h-4 w-4" />} label="TikTok" badge={DATA.tiktok.badge} />
+          <Tab active={tab === "instagram"} onClick={() => setTab("instagram")} icon={<Instagram className="h-4 w-4" />} label="Instagram" badge={DATA.instagram.badge} />
+          <Tab active={tab === "youtube"} onClick={() => setTab("youtube")} icon={<Youtube className="h-4 w-4" />} label="YouTube" badge={DATA.youtube.badge} />
+        </div>
+        <div className="flex w-full flex-col gap-2 sm:ml-auto sm:w-auto sm:flex-row sm:items-center">
+          <a
+            href={d.url}
+            target="_blank"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm transition hover:bg-neutral-100 sm:w-auto"
+          >
+            Go to {cap(tab)} ↗
+          </a>
+          <a
+            href={MEDIA_KIT_PDF_PATH}
+            download
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50 sm:w-auto"
+            aria-label="Download Media Kit as PDF"
+          >
+            <FileDown className="h-4 w-4" />
+            <span className="hidden sm:inline">Download Media Kit (PDF)</span>
+            <span className="sm:hidden">Media Kit PDF</span>
+          </a>
+        </div>
       </div>
 
       {/* Statistics */}
@@ -465,7 +474,8 @@ function MediaKitFooter() {
 
 export default function MediaKitPage() {
   return (
-    <main className="min-h-dvh bg-neutral-100">
+      <main className="min-h-dvh bg-neutral-100 pb-16 pt-20 sm:pt-24">
+      <TopNavPill />
       <CreatorHero />
       <ChannelsSection />
       <MediaKitFooter />
