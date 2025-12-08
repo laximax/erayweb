@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useLang } from "../components/LangProvider";
+import { useLang } from "../components/LangProvider"; // Yolun doğru olduğundan emin olun
 import { Menu, X } from "lucide-react";
 
 const SECTIONS = ["benefits", "testimonials"] as const;
@@ -19,7 +19,7 @@ export default function TopNavPill() {
     pathname?.startsWith("/mediakit");
 
   const [active, setActive] = useState<Sec | null>(null);
-   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (isStandalone) return;
@@ -39,12 +39,12 @@ export default function TopNavPill() {
     return () => ios.forEach((o) => o.disconnect());
   }, [isStandalone]);
 
-  // Whitespace-nowrap ekleyerek mobilde metinlerin alt satıra düşmesini engelledik
   const linkCls = (id: Sec) =>
     `transition whitespace-nowrap ${
       active === id ? "text-white" : "text-neutral-300 hover:text-white"
     }`;
-    const handleNavClick = () => setMenuOpen(false);
+
+  const handleNavClick = () => setMenuOpen(false);
 
   const languageSwitcher = (
     <div
@@ -76,56 +76,52 @@ export default function TopNavPill() {
       </button>
     </div>
   );
+
   return (
-    // Mobilde genişliği kısıtlayıp ortaladık
-    <div className="fixed left-1/2 top-4 z-50 w-full max-w-[95%] -translate-x-1/2 sm:w-auto sm:max-w-none">
+    <div className="fixed left-1/2 top-4 z-50 w-full max-w-[95%] -translate-x-1/2 md:w-auto md:max-w-none">
+      {/* ----------------MOBILE NAVIGATION---------------- */}
       <nav
         className="
-         rounded-[28px] bg-black/90 backdrop-blur-sm
-          px-4 py-3 sm:px-7
-          text-[14px] sm:text-[15px]
+          block md:hidden
+          rounded-[28px] bg-black/90 backdrop-blur-sm
+          px-4 py-3
+          text-[14px]
           shadow-lg ring-1 ring-black/10
-          
         "
       >
-         <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3">
           {/* Logo */}
-          <Link href="/" className="font-semibold text-white shrink-0">
+          <Link href="/" className="shrink-0 font-semibold text-white">
             {t.brand}
             <span className="align-super text-[10px] opacity-70">®</span>
           </Link>
-        
-            <button
+
+          <button
             type="button"
-            className="ml-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:hidden"
+            className="ml-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
             onClick={() => setMenuOpen((prev) => !prev)}
             aria-label={menuOpen ? "Close navigation" : "Open navigation"}
             aria-expanded={menuOpen}
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
-              
-               <div className="ml-auto hidden sm:flex sm:items-center sm:gap-2">
-            {languageSwitcher}
-          </div>
         </div>
 
         <div
-          className={`mt-3 flex flex-col items-start gap-3 sm:mt-0 sm:flex-row sm:items-center sm:gap-6 ${
+          className={`mt-3 flex flex-col items-start gap-3 ${
             menuOpen ? "flex" : "hidden"
-          } sm:flex`}
+          }`}
         >
           {isStandalone ? (
-             
             <Link
               href="/"
               onClick={handleNavClick}
-              className="rounded-full bg-white/10 px-3 py-1.5 text-white transition hover:bg-white/15 whitespace-nowrap"
+              className="whitespace-nowrap rounded-full bg-white/10 px-3 py-1.5 text-white transition hover:bg-white/15"
             >
               {t.nav.back}
             </Link>
-       ) : (
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
+          ) : (
+            <div className="flex flex-col gap-2">
               <a href="#benefits" className={linkCls("benefits")} onClick={handleNavClick}>
                 {t.nav.benefits}
               </a>
@@ -135,15 +131,15 @@ export default function TopNavPill() {
               <Link
                 href="/links"
                 onClick={handleNavClick}
-                className="text-neutral-300 transition hover:text-white whitespace-nowrap"
+                className="whitespace-nowrap text-neutral-300 transition hover:text-white"
               >
                 {t.nav.faq}
               </Link>
-            
-             <Link
+
+              <Link
                 href="/mediakit"
                 onClick={handleNavClick}
-                className="text-neutral-300 transition hover:text-white whitespace-nowrap"
+                className="whitespace-nowrap text-neutral-300 transition hover:text-white"
               >
                 Media Kit
               </Link>
@@ -151,15 +147,76 @@ export default function TopNavPill() {
               <Link
                 href="/contact"
                 onClick={handleNavClick}
-                className="text-neutral-300 transition hover:text-white whitespace-nowrap"
+                className="whitespace-nowrap text-neutral-300 transition hover:text-white"
               >
                 Contact
               </Link>
             </div>
           )}
 
-          <div className="w-full sm:hidden">{languageSwitcher}</div>
-       
+          <div className="w-full">{languageSwitcher}</div>
+        </div>
+      </nav>
+
+      {/* ----------------DESKTOP & TABLET NAVIGATION---------------- */}
+      <nav
+        className="
+          hidden md:flex md:items-center
+          rounded-full bg-black/90 backdrop-blur-sm
+          px-5 py-3 lg:px-7
+          text-[15px]
+          shadow-lg ring-1 ring-black/10
+        "
+      >
+        {/* 1. Logo (En Solda) */}
+        <Link href="/" className="shrink-0 font-semibold text-white mr-6 lg:mr-8">
+          {t.brand}
+          <span className="align-super text-[10px] opacity-70">®</span>
+        </Link>
+
+        {/* 2. Linkler (Ortada / Solda Logo'nun yanında) */}
+        {isStandalone ? (
+            // Eğer standalone sayfalardaysak Back butonu
+            <Link
+              href="/"
+              onClick={handleNavClick}
+              className="whitespace-nowrap rounded-full bg-white/10 px-3 py-1.5 text-white transition hover:bg-white/15"
+            >
+              {t.nav.back}
+            </Link>
+        ) : (
+          <div className="flex items-center gap-6 lg:gap-8">
+            <a href="#benefits" className={linkCls("benefits")}>
+              {t.nav.benefits}
+            </a>
+            <a href="#testimonials" className={linkCls("testimonials")}>
+              {t.nav.testimonials}
+            </a>
+            <Link
+              href="/links"
+              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+            >
+              {t.nav.faq}
+            </Link>
+            <Link
+              href="/mediakit"
+              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+            >
+              Media Kit
+            </Link>
+            <Link
+              href="/contact"
+              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+            >
+              Contact
+            </Link>
+          </div>
+        )}
+
+        {/* 3. Dil Değiştirici (En Sağda) */}
+        {/* ml-auto: Otomatik sol boşluk vererek en sağa iter */}
+        <div className="ml-auto pl-6">
+           {languageSwitcher}
         </div>
       </nav>
     </div>
