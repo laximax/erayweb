@@ -333,7 +333,7 @@ export const dict: Record<Lang, Translations> = {
       goTo: (platform: string) => `${platform} sayfasına git ↗`,
       downloadPdf: "Medya Kitini İndir (PDF)",
       downloadPdfShort: "Medya Kiti PDF",
-      totalViews: "Toplam İzlenme",
+      totalViews: "Son 90 günün Toplam Görüntülenmesi",
       avgPostImpressions: "Gönderi Başına Ortalama Erişim",
       postEngagementRate: "Gönderi Etkileşim Oranı",
       avgReelsViews: "Reels Ortalama İzlenme",

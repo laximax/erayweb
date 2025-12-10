@@ -45,9 +45,14 @@ export default function ContactPage() {
         {/* Ana Başlık */}
         <h1 className="mb-4 text-[clamp(2.4rem,6vw,3.5rem)] font-bold tracking-tight text-neutral-900 sm:text-6xl">
           {t.contact.titlePart1} <br />
-          <span className="font-serif italic text-neutral-500">
-            {t.contact.titlePart2}
-          </span>
+                <span className="font-serif italic font-semibold text-black relative inline-block">
+  {t.contact.titlePart2}
+  {/* Altındaki dekoratif çizgi */}
+  <span className="absolute -bottom-1 left-0 w-full h-2 bg-yellow-300/50 -z-10 -rotate-1 rounded-sm"></span>
+</span>
+
+
+
         </h1>
 
        <p className="mx-auto mb-10 max-w-xl text-neutral-600 sm:text-lg">

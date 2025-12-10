@@ -57,11 +57,19 @@ type Message = {
 };
 
 export default function AiAssistant() {
+  const pathname = usePathname();
+  const isStaticPage =
+    pathname?.startsWith("/contact") ||
+    pathname?.startsWith("/mediakit") ||
+    pathname?.startsWith("/prompts");
+  const enableAnimations = !isStaticPage;
   // Status: init(bekle), intro(ortada), docked(sağ alt), open(chat açık)
-  const [status, setStatus] = useState<"intro" | "docked" | "open" | "init">("init");
+  const [status, setStatus] = useState<"intro" | "docked" | "open" | "init">(
+    enableAnimations ? "init" : "docked"
+  );
   
   const [showTooltip, setShowTooltip] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(!enableAnimations);
   
   // Chat state
   const [inputVal, setInputVal] = useState("");
@@ -73,6 +81,7 @@ export default function AiAssistant() {
 
   // 1. BAŞLANGIÇ MANTIĞI (F5 KONTROLÜ DAHİL)
   useEffect(() => {
+     if (!enableAnimations) return;
     // Senkron hatasını önlemek için setTimeout
     const initTimer = setTimeout(() => {
       const hasSeenIntro = sessionStorage.getItem("novaIntroSeen");
@@ -89,7 +98,7 @@ export default function AiAssistant() {
     }, 0);
 
     return () => clearTimeout(initTimer);
-  }, []);
+  }, [enableAnimations]);
 
   // 2. INTRO -> DOCKED GEÇİŞİ
   useEffect(() => {
@@ -105,6 +114,10 @@ export default function AiAssistant() {
   useEffect(() => {
     let showTimer: NodeJS.Timeout;
     let hideTimer: NodeJS.Timeout;
+
+
+
+    if (!enableAnimations) return () => undefined;
 
     if (status === "docked") {
       // Intro bittiğinde veya sayfa yüklendiğinde balonu göster
@@ -135,7 +148,7 @@ export default function AiAssistant() {
       clearTimeout(showTimer);
       clearTimeout(hideTimer);
     };
-  }, [status]);
+   }, [enableAnimations, status]);
 
   // 4. Auto Scroll
   useEffect(() => {
@@ -145,45 +158,43 @@ export default function AiAssistant() {
   }, [messages, isTyping]);
 
   // --- BOT CEVAPLARI ---
-  const handleSend = (e?: React.FormEvent) => {
+  // --- BOT CEVAPLARI ---
+  const handleSend = async (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!inputVal.trim()) return;
 
+    // 1. Kullanıcı mesajını ekrana bas
     const userMsg: Message = { id: Date.now(), text: inputVal, sender: "user" };
     setMessages((prev) => [...prev, userMsg]);
     setInputVal("");
     setIsTyping(true);
 
-    setTimeout(() => {
-      const lowerText = userMsg.text.toLowerCase();
-      let botResponse = "Henüz geliştirme aşamasında olduğum için bunu henüz öğrenemedim 🤔 Ama bana 'reklam', 'iletişim', 'prompt' veya 'iş birliği' hakkında sorular sorabilirsin!";
+    try {
+      // 2. Sunucuya (API'ye) istek gönder
+      const res = await fetch("/api/nova", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMsg.text }),
+      });
 
-      // --- BASİT CEVAPLAR ---
-      if (lowerText.includes("selam") || lowerText.includes("merhaba")) {
-        botResponse = "Selamlar! 👋 Hoş geldin. Sana nasıl rehberlik edebilirim?";
-      } 
-      else if (lowerText.includes("nasılsın")) {
-        botResponse = "Sistemlerim %100 performansla çalışıyor! 🚀 Sen nasılsın?";
-      }
-      else if (lowerText.includes("iletişim") || lowerText.includes("mail")) {
-        botResponse = "Bana en hızlı eray@eraytechs.com adresinden ulaşabilirsin. 📩";
-      }
-      else if (lowerText.includes("ekipman")) {
-        botResponse = "Kullandığım tüm ekipmanları menüdeki 'Bağlantılar' sayfasında bulabilirsin! 🖥️";
-      }
-      else if (lowerText.includes("program") || lowerText.includes("edit")) {
-        botResponse = "Videolarımda genellikle Adobe Premiere Pro ve After Effects kullanıyorum.🎬";
-      }
-      else if (lowerText.includes("kimsin")) {
-        botResponse = "Ben Nova 🤖 ErayTechs'in sanal asistanıyım.";
-      }
-      else if (lowerText.includes("görüşürüz") || lowerText.includes("bb")) {
-        botResponse = "Görüşmek üzere! 👋 Teknolojiyle kal.";
-      }
+      if (!res.ok) throw new Error("API hatası");
 
-      setMessages((prev) => [...prev, { id: Date.now() + 1, text: botResponse, sender: "bot" }]);
+      const data = await res.json();
+      
+      // 3. Gelen cevabı ekrana bas
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now() + 1, text: data.response, sender: "bot" },
+      ]);
+    } catch (error) {
+      // Hata durumunda
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now() + 1, text: "Bağlantıda bir sorun oluştu 😔", sender: "bot" },
+      ]);
+    } finally {
       setIsTyping(false);
-    }, 1000);
+    }
   };
 
   if (!mounted || status === "init") return null;
@@ -191,8 +202,9 @@ export default function AiAssistant() {
   // --- ANİMASYON AYARLARI ---
   // Eğer status "intro" ise (ilk giriş), animasyon ortadan başlar.
   // Eğer status "docked" ise (F5 atılmış), animasyon direkt sağ alttan başlar (hareket etmez).
-  const isIntro = status === "intro";
-  
+  const isIntro = enableAnimations && status === "intro";
+
+  const dockedPosition = { right: "24px", bottom: "24px", x: 0, y: 0, scale: 0.85, opacity: 1 } as const;
   return (
     <>
       <style jsx>{`
@@ -227,18 +239,22 @@ export default function AiAssistant() {
         // Eğer INTRO ise başlangıç pozisyonu sol dışarıda (efekt için)
         // Eğer DOCKED ise (F5 durumu) başlangıç pozisyonu direkt sağ alt.
         initial={
-          isIntro 
-            ? { left: "-150px", top: "-50px", scale: 0.5, opacity: 0 } 
-            : { left: "auto", top: "auto", right: "24px", bottom: "24px", x: 0, y: 0, scale: 0.85, opacity: 1 }
+          enableAnimations
+            ? isIntro
+              ? { left: "-150px", top: "-50px", scale: 0.5, opacity: 0 }
+              : { left: "auto", top: "auto", ...dockedPosition }
+            : { left: "auto", top: "auto", ...dockedPosition }
         }
         animate={
-          status === "intro"
-            ? { left: "50%", top: "40%", x: "-50%", y: "-50%", scale: 1.5, opacity: 1, transition: { type: "spring", duration: 2, bounce: 0.3 } }
-            : status === "docked"
-              ? { left: "auto", top: "auto", right: "24px", bottom: "24px", x: 0, y: 0, scale: 0.85, opacity: 1, transition: { type: "spring", stiffness: 120, damping: 18 } }
-            : { opacity: 0, scale: 0, pointerEvents: "none", right: "24px", bottom: "24px" }
+          enableAnimations
+            ? status === "intro"
+              ? { left: "50%", top: "40%", x: "-50%", y: "-50%", scale: 1.5, opacity: 1, transition: { type: "spring", duration: 2, bounce: 0.3 } }
+              : status === "docked"
+                ? { left: "auto", top: "auto", ...dockedPosition, transition: { type: "spring", stiffness: 120, damping: 18 } }
+                : { opacity: 0, scale: 0, pointerEvents: "none", right: "24px", bottom: "24px" }
+            : { left: "auto", top: "auto", ...dockedPosition }
         }
-        whileHover={{ scale: 0.9 }}
+        whileHover={enableAnimations ? { scale: 0.9 } : undefined}
         style={{ position: "fixed", zIndex: 9999, cursor: "pointer", width: "64px", height: "64px" }}
         onClick={() => status === "docked" && setStatus("open")}
       >

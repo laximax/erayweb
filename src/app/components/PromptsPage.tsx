@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import React, { useMemo, useState, useEffect, useRef, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import React, { useMemo, useState, useEffect, useRef, Suspense, useCallback } from 'react';
 import { 
   Check, Copy, Search, SlidersHorizontal, ChevronLeft, ChevronRight, 
   X, Info, Maximize2, Download, ExternalLink, Share2, Layers 
@@ -128,7 +128,7 @@ function PromptsContent() {
   const searchParams = useSearchParams();
 
   // --- HATA DÜZELTME: updateUrl FONKSİYONU EN ÜSTE TAŞINDI ---
-  const updateUrl = (item: typeof RAW_DATA[0] | null) => {
+  const updateUrl = useCallback((item: typeof RAW_DATA[0] | null) => {
     const params = new URLSearchParams(searchParams.toString());
     if (item) {
       params.set('id', item.id.toString());
@@ -136,18 +136,18 @@ function PromptsContent() {
       params.delete('id');
     }
     window.history.replaceState(null, '', `?${params.toString()}`);
-  };
+ }, [searchParams]);
 
   // --- HATA DÜZELTME: handleCloseModal ve handleOpenModal EN ÜSTE TAŞINDI ---
-  const handleOpenModal = (item: typeof RAW_DATA[0]) => {
+  const handleOpenModal = useCallback((item: typeof RAW_DATA[0]) => {
     setSelectedPrompt(item);
     updateUrl(item);
-  };
-  
-  const handleCloseModal = () => {
+  }, [updateUrl]);
+
+  const handleCloseModal = useCallback(() => {
     setSelectedPrompt(null);
     updateUrl(null);
-  };
+   }, [updateUrl]);
 
   // 1. Initial Loading
   useEffect(() => {
@@ -192,7 +192,7 @@ function PromptsContent() {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [selectedPrompt]);
+  }, [handleCloseModal, selectedPrompt]);
 
   const filteredPrompts = useMemo(() => {
     return INITIAL_PROMPTS.filter((p) => {
@@ -222,7 +222,7 @@ function PromptsContent() {
     };
     
     if (navigator.share) { 
-      try { await navigator.share(shareData); } catch (err) { console.log("Paylaşım iptal edildi"); } 
+      try { await navigator.share(shareData); } catch { console.log("Paylaşım iptal edildi"); }
     } else { 
       handleCopy(directLink); 
       alert("Direkt prompt linki kopyalandı!"); 

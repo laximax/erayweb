@@ -23,6 +23,8 @@ function TikTokIcon({ className }: { className?: string }) {
   );
 }
 
+
+
 /* ================= HERO ================= */
 
 type SocialCounts = { tiktok?: number | null; instagram?: number | null; youtube?: number | null };
@@ -108,9 +110,22 @@ function CreatorHero() {
           </p>
 
           <div className="mt-6 flex flex-wrap justify-center md:justify-start items-center gap-4 sm:gap-6">
-            <Stat icon={<TikTokIcon className="h-4 w-4" />} label={platformLabels.tiktok} value={formatCount(counts.tiktok)} />
-            <Stat icon={<Instagram className="h-4 w-4" />} label={platformLabels.instagram} value={formatCount(counts.instagram)} />
-            <Stat icon={<Youtube className="h-4 w-4" />} label={platformLabels.youtube} value={formatCount(counts.youtube)} />
+            <Stat 
+  icon={<Instagram className="h-4 w-4" />} 
+  label={platformLabels.instagram} 
+  value={formatCount(DATA.instagram.stats.followers)} // Burayı DATA'dan çekiyoruz
+/>
+            <Stat 
+  icon={<TikTokIcon className="h-4 w-4" />} 
+  label={platformLabels.tiktok} 
+  value={formatCount(DATA.tiktok.stats.followers)} // Burayı DATA'dan çekiyoruz
+/>
+
+<Stat 
+  icon={<Youtube className="h-4 w-4" />} 
+  label={platformLabels.youtube} 
+  value={formatCount(DATA.youtube.stats.followers)} // Burayı DATA'dan çekiyoruz
+/>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white transition hover:bg-black/90"
@@ -147,8 +162,7 @@ type Stats = {
   totalViews?: number;            
   avgPostImpressions?: number;     
   postEngagementRate?: number;     
-  avgReelsViews?: number;          
-  reelsEngagementRate?: number;    
+  avgReelsViews?: number;            
   avgDurationSec?: number;         
   engagementRate?: number;         
 };
@@ -165,97 +179,109 @@ const MEDIA_KIT_PDF_PATH = "/media/ErayTechs-Media-Kit.pdf";
 const DATA: Record<PlatformKey, { stats: Stats; audience: Audience; url: string; badge: string }> = {
   tiktok: {
     url: "https://www.tiktok.com/@eraytechs",
-    badge: "1.6K",
+    badge: "2.3K",
     stats: {
-      followers: 1578,
-      videos: 33,
-      totalViews: 1_400_000,
+      followers: 2300,
+      videos: 39,
+      totalViews: 2_100_000,
       avgReelsViews: 18_200,
-      engagementRate: 6.48,
-      avgDurationSec: 178,
+      engagementRate: 2.25,
+      
     },
     audience: {
       location: [
-        { label: "Türkiye", value: 70.09 },
-        { label: "Diğer", value: 19.8 },
-        { label: "Almanya", value: 2.7 },
-        { label: "Azerbaycan", value: 2.3 },
-        { label: "Mısır", value: 1.0 },
-        { label: "Bulgaristan", value: 0.7 },
-        { label: "Hollanda", value: 0.6 },
-        { label: "Belçika", value: 0.5 },
-        { label: "Fransa", value: 0.5 },
-        { label: "İngiltere", value: 0.5 },
-        { label: "ABD", value: 0.5 },
+        { label: "Türkiye", value: 94.6 },
+        { label: "Azerbaycan", value: 1.6 },
+        { label: "Diğer", value: 1.5 },
+        { label: "Almanya", value: 0.8 },
+        { label: "Bulgaristan", value: 0.5 },
+        { label: "Avusturya", value: 0.2 },
+        { label: "Hollanda", value: 0.2 },
+        { label: "Gürcistan", value: 0.2 },
+        { label: "Yunanistan", value: 0.2 },
+        { label: "Suudi Arabistan", value: 0.1 },
+        { label: "Kuzey Makedonya", value: 0.1 },
       ],
       age: [
-        { label: "18–24", value: 14.2 },
-        { label: "25–34", value: 28.7 },
-        { label: "35–44", value: 26.8 },
-        { label: "45–54", value: 19.7 },
-        { label: "55+", value: 10.6 },
+        { label: "18–24", value: 26.4 },
+        { label: "25–34", value: 34.8 },
+        { label: "35–44", value: 19.6 },
+        { label: "45–54", value: 12.9 },
+        { label: "55+", value: 6.3 },
       ],
-      gender: { male: 83.0, female: 17.0 },
+      gender: { male: 85.0, female: 15.0 },
     },
   },
   instagram: {
     url: "https://instagram.com/eraytechs",
-    badge: "4.9K",
+    badge: "8.3K",
     stats: {
-      followers: 4_992,
-      videos: 32,
-      totalViews: 4_201_720,
-      avgPostImpressions: 45_000,
+      followers: 8_305,
+      videos: 37,
+      totalViews: 7_201_720,
+      avgPostImpressions: 187_056,
       postEngagementRate: 1.74,
-      avgReelsViews: 11_000,
-      reelsEngagementRate: 2.06,
-      avgDurationSec: 35,
+      
+      
     },
     audience: {
       location: [
-        { label: "Türkiye", value: 94.7 },
-        { label: "Almanya", value: 0.9 },
-        { label: "Hindistan", value: 0.7 },
-        { label: "Azerbaycan", value: 0.4 },
-        { label: "Kıbrıs", value: 0.4 },
+        { label: "Türkiye", value: 92.3 },
+        { label: "Almanya", value: 1.6 },
+        { label: "Azerbaycan", value: 1.5 },
+        { label: "Kıbrıs", value: 0.6 },
+        { label: "Hindistan", value: 0.4 },
+        
+        
       ],
       age: [
-        { label: "13–17", value: 11.9 },
-        { label: "18–24", value: 27.9 },
-        { label: "25–34", value: 31.3 },
-        { label: "35–44", value: 15.0 },
-        { label: "45–54", value: 8.6 },
-        { label: "55–64", value: 3.5 },
-        { label: "65+", value: 1.7 },
+        { label: "13–17", value: 7.4 },
+        { label: "18–24", value: 19.8 },
+        { label: "25–34", value: 32.2 },
+        { label: "35–44", value: 20.7 },
+        { label: "45–54", value: 13.1 },
+        { label: "55–64", value: 55.64 },
+        { label: "65+", value: 2.3 },
       ],
       gender: { male: 94.8, female: 5.2 },
     },
   },
   youtube: {
     url: "https://youtube.com/@eraytechs",
-    badge: "328",
+    badge: "474",
     stats: {
-      followers: 328,
-      videos: 34,
-      totalViews: 381_000,
-      avgReelsViews: 3_200,   // video ort. izlenme
-      engagementRate: 4.1,
-      avgDurationSec: 420,
+      followers: 474,
+      videos: 40,
+      totalViews: 525_864,
+      avgReelsViews: 13_146_3,
+       
+      
+      
     },
     audience: {
       location: [
-        { label: "Türkiye", value: 90 },
-        { label: "Azerbaycan", value: 2.0 },
-        { label: "Almanya", value: 1.0 },
+        { label: "Türkiye", value: 91.0 },
+        { label: "Azerbaycan", value: 2.9 },
+        { label: "Hollanda", value: 0.5 },
+        { label: "Kıbrıs", value: 0.2 },
+        { label: "ABD", value: 0.2 },
+        { label: "Fransa", value: 0.1 },
+        { label: "Birleşik Krallık", value: 0.1 },
+        { label: "Bulgaristan", value: 0.1 },
+        { label: "Avusturya", value: 0.1 },
         
       ],
       age: [
-        { label: "18–24", value: 25.0 },
-        { label: "25–34", value: 39.0 },
-        { label: "35–44", value: 18.0 },
+        { label: "13–17", value: 5.3 },
+        { label: "18–24", value: 24.8 },
+        { label: "25–34", value: 41.7 },
+        { label: "35–44", value: 18.7 },
+        { label: "45–54", value: 7.6 },
+        { label: "55–64", value: 1.0 },
+        { label: "65+", value: 0.8 },
        
       ],
-      gender: { male: 82, female: 18 },
+      gender: { male: 91, female: 9 },
     },
   },
 };
@@ -337,7 +363,7 @@ function ChannelsSection() {
         <StatCard title={t.mediakit.totalViews} value={d.stats.totalViews ? fmt(d.stats.totalViews) : "—"} />
           <StatCard title={t.mediakit.avgPostImpressions} value={d.stats.avgPostImpressions ? fmt(d.stats.avgPostImpressions) : "—"} />
           <StatCard title={t.mediakit.postEngagementRate} value={d.stats.postEngagementRate != null ? `${d.stats.postEngagementRate.toFixed(2)}%` : "—"} />
-          <StatCard title={t.mediakit.avgReelsViews} value={d.stats.avgReelsViews ? fmt(d.stats.avgReelsViews) : "—"} />
+          
         </div>
       ) : (
         <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
@@ -346,7 +372,7 @@ function ChannelsSection() {
            <StatCard title={t.mediakit.totalViews} value={d.stats.totalViews ? fmt(d.stats.totalViews) : "—"} />
           <StatCard title={avgViewsLabel} value={d.stats.avgReelsViews ? fmt(d.stats.avgReelsViews) : "—"} />
           <StatCard title={t.mediakit?.engagementRate ?? "Engagement Rate"} value={d.stats.engagementRate != null ? `${d.stats.engagementRate.toFixed(2)}%` : "—"} />
-          <StatCard title={t.mediakit?.avgDuration ?? "Avg Duration"} value={fmtDuration(d.stats.avgDurationSec)} />
+          
         </div>
       )}
 
@@ -510,6 +536,8 @@ export default function MediaKitPage() {
   return (
       <main className="min-h-dvh bg-neutral-100 pt-20 sm:pt-24">
       <TopNavPill />
+       <div className="mx-auto flex w-full max-w-6xl justify-end px-4 pb-4 sm:px-8 lg:px-10">
+      </div>
       <CreatorHero />
       <ChannelsSection />
       <MediaKitFooter />

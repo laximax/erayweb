@@ -1,5 +1,6 @@
 // src/app/mediakit/layout.tsx
 import TopNavPill from "../components/TopNavPill";
+import AiAssistant from "../AiAssistant/AiAssistant";
 
 export const metadata = {
   title: "Media Kit – ErayTechs",
@@ -11,6 +12,7 @@ export default function MediaKitLayout({ children }: { children: React.ReactNode
     <>
       <TopNavPill />  {/* sadece /mediakit’te görünür */}
       {children}
+       <AiAssistant />
     </>
   );
 }
