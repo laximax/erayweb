@@ -14,7 +14,7 @@ export default function Page() {
       <BenefitsSection />
       <TestimonialsSection />
       <SiteFooter />
-      {/* aşağıya diğer bölümler gelecek */}
+      
     </>
   );
 }
