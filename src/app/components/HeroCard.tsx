@@ -54,7 +54,7 @@ export default function HeroCard() {
             </div>
 
             {/* Sağ Taraf: Sosyal Medya Butonları */}
-            <div className="order-2 flex items-end justify-center lg:order-3 lg:col-span-5 lg:h-full lg:justify-end lg:pb-4">
+            <div className="order-8 flex items-end justify-center lg:order-3 lg:col-span-5 lg:h-full lg:justify-end lg:pb-4">
               <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
                 
                 <SocialBtn

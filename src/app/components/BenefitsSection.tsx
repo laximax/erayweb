@@ -54,7 +54,7 @@ export default function BenefitsSection() {
 
   return (
     <section
-      id="benefits"
+      id="collaboration"
       className="flex min-h-screen items-center justify-center bg-neutral-100 py-16 sm:py-24 lg:py-28 scroll-mt-28"
     >
       <Container>

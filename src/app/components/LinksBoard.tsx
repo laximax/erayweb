@@ -48,8 +48,8 @@ const SOCIAL_DATA: LinkItem[] = [
 ];
 
 const SHOP_DATA: LinkItem[] = [
-  { id: "gear", href: "https://example.com/gear", icon: <ShoppingBag className="h-4 w-4" />, chip: "New" },
-  { id: "presets", href: "https://example.com/presets", icon: <ShoppingBag className="h-4 w-4" /> },
+  { id: "gear", href: "", icon: <ShoppingBag className="h-4 w-4" />, chip: "New" },
+  { id: "presets", href: "", icon: <ShoppingBag className="h-4 w-4" /> },
 ];
 
 export default function LinksBoard() {
@@ -190,7 +190,7 @@ export default function LinksBoard() {
 
           {/* --- ALT ÇUBUK --- */}
           <div className="mt-6 flex items-center justify-between rounded-2xl bg-neutral-50 px-4 py-3 text-xs text-neutral-600 ring-1 ring-neutral-200">
-            <span>{t.footer?.about2}</span>
+            <span>{t.linksPage.footerText}</span>
             <button
               onClick={handleCopy}
               className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-neutral-900 ring-1 ring-neutral-300 transition hover:bg-neutral-100"

@@ -13,14 +13,28 @@ import Container from "./Container";
 import { motion } from "framer-motion";
 import { useLang } from "../components/LangProvider";
 
-// Tip tanımlaması (Interface)
+// Senin gönderdiğin orijinal TikTok SVG'si
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg 
+      viewBox="0 0 24 24" 
+      fill="currentColor" 
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-.002-.001.002.001a2.895 2.895 0 0 1 3.183-4.51v-3.5a6.329 6.329 0 0 0-5.394 10.692 6.33 6.33 0 0 0 10.857-4.424V8.687a8.182 8.182 0 0 0 4.773 1.526V6.79a4.831 4.831 0 0 1-1.003-.104z" />
+    </svg>
+  );
+}
+
+// Tip tanımlaması
 interface TestimonialItem {
   name: string;
   handle: string;
   quote: string;
   desc: string;
   avatar: string;
-  source: string;
+  source: 'instagram' | 'youtube' | 'tiktok' | 'like';
 }
 
 export default function TestimonialsSection() {
@@ -28,8 +42,9 @@ export default function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // === VERİLER ===
+  // === VERİLER (DAĞILIM: 3 INSTAGRAM, 3 YOUTUBE, 3 TIKTOK) ===
   const originalItems: TestimonialItem[] = lang === "en" ? [
+    // 1. Instagram
     {
       name: "Hamza",
       handle: "Instagram Follower",
@@ -38,6 +53,16 @@ export default function TestimonialsSection() {
       avatar: "/avatar-2.png",
       source: "instagram",
     },
+    // 2. YouTube
+    {
+      name: "Mert",
+      handle: "YouTube Subscriber",
+      quote: "Super Helpful",
+      desc: "Brother, this was so useful. Thanks a lot!",
+      avatar: "/avatar-2.png",
+      source: "youtube",
+    },
+    // 3. Instagram
     {
       name: "Niğda",
       handle: "Instagram Follower",
@@ -46,6 +71,25 @@ export default function TestimonialsSection() {
       avatar: "/avatar-1.png",
       source: "instagram",
     },
+    // 4. YouTube
+    {
+      name: "Can",
+      handle: "YouTube Subscriber",
+      quote: "Tried and Tested",
+      desc: "Tried and confirmed. You share great content, keep it up!",
+      avatar: "/avatar-2.png",
+      source: "youtube",
+    },
+    // 5. TikTok
+    {
+      name: "Esra",
+      handle: "TikTok Follower",
+      quote: "It Finally Worked!",
+      desc: "I tried it and it worked perfectly, thank you Esra!",
+      avatar: "/avatar-1.png",
+      source: "tiktok",
+    },
+    // 6. Instagram
     {
       name: "Ege",
       handle: "Instagram Follower",
@@ -54,7 +98,35 @@ export default function TestimonialsSection() {
       avatar: "/avatar-2.png",
       source: "instagram",
     },
+    // 7. TikTok
+    {
+      name: "Emirhan",
+      handle: "TikTok Follower",
+      quote: "Followed the Steps",
+      desc: "Thanks for the video, I did exactly what you said and it worked.",
+      avatar: "/avatar-2.png",
+      source: "tiktok",
+    },
+    // 8. YouTube
+    {
+      name: "Selin",
+      handle: "YouTube Subscriber",
+      quote: "Great Explanation",
+      desc: "I was looking for this solution for hours. You explained it so simply.",
+      avatar: "/avatar-1.png",
+      source: "youtube",
+    },
+    // 9. TikTok (DÜZELTİLDİ: Burak artık TikTok'ta)
+    {
+      name: "Burak",
+      handle: "TikTok Follower",
+      quote: "Just What I Needed",
+      desc: "Simple, fast, and effective. Followed immediately!",
+      avatar: "/avatar-2.png",
+      source: "tiktok",
+    },
   ] : [
+    // 1. Instagram
     {
       name: "Hamza",
       handle: "Instagram Takipçisi",
@@ -63,6 +135,16 @@ export default function TestimonialsSection() {
       avatar: "/avatar-2.png",
       source: "instagram",
     },
+    // 2. YouTube
+    {
+      name: "Mert",
+      handle: "YouTube Abonesi",
+      quote: "Çok İşime Yaradı",
+      desc: "Abi çok işime yaradı, gerçekten teşekkürler!",
+      avatar: "/avatar-2.png",
+      source: "youtube",
+    },
+    // 3. Instagram
     {
       name: "Niğda",
       handle: "Instagram Takipçisi",
@@ -71,6 +153,25 @@ export default function TestimonialsSection() {
       avatar: "/avatar-1.png",
       source: "instagram",
     },
+    // 4. YouTube
+    {
+      name: "Can",
+      handle: "YouTube Abonesi",
+      quote: "Denendi, Onaylandı",
+      desc: "Denendi onaylandı. Güzel içerikler paylaşıyorsun böyle devam et!",
+      avatar: "/avatar-2.png",
+      source: "youtube",
+    },
+    // 5. TikTok
+    {
+      name: "Esra",
+      handle: "TikTok Takipçisi",
+      quote: "Sonunda Oldu!",
+      desc: "Oldu teşekkürler, tam ümidi kesmiştim!",
+      avatar: "/avatar-1.png",
+      source: "tiktok",
+    },
+    // 6. Instagram
     {
       name: "Ege",
       handle: "Instagram Takipçisi",
@@ -79,10 +180,36 @@ export default function TestimonialsSection() {
       avatar: "/avatar-2.png",
       source: "instagram",
     },
+    // 7. TikTok
+    {
+      name: "Emirhan",
+      handle: "TikTok Takipçisi",
+      quote: "Dediklerini Yaptım",
+      desc: "Video için teşekkürler, dediklerini tek tek yaptım ve sorun düzeldi.",
+      avatar: "/avatar-2.png",
+      source: "tiktok",
+    },
+    // 8. YouTube
+    {
+      name: "Selin",
+      handle: "YouTube Abonesi",
+      quote: "Harika Anlatım",
+      desc: "Saatlerdir çözüm arıyordum, ilaç gibi geldi. Eline sağlık.",
+      avatar: "/avatar-1.png",
+      source: "youtube",
+    },
+    // 9. TikTok (DÜZELTİLDİ: Burak artık TikTok'ta)
+    {
+      name: "Burak",
+      handle: "TikTok Takipçisi",
+      quote: "Tam Aradığım Şey",
+      desc: "Hızlı, net ve çözüm odaklı. Hemen takip ettim.",
+      avatar: "/avatar-2.png",
+      source: "tiktok",
+    },
   ];
 
-  // DÜZELTME: Sonsuz döngü ve masaüstünde 3. sayfanın boş kalmaması için listeyi 3 kez kopyalıyoruz.
-  // Masaüstünde her "Sayfa" 3 kart gösterir. 3 sayfa gezmek için en az 9 kart gerekir (3x3).
+  // Listeyi 3 kez kopyalıyoruz
   const items = [...originalItems, ...originalItems, ...originalItems];
 
   const handleNext = () => {
@@ -93,17 +220,15 @@ export default function TestimonialsSection() {
     setCurrentIndex((prev) => (prev - 1 + originalItems.length) % originalItems.length);
   };
 
-  // === OTOMATİK KAYDIRMA ===
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
       handleNext();
-    }, 4000); // 4 saniyede bir kayar
+    }, 4000); 
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPaused, currentIndex]);
 
-  // === GÖRSEL DETAYLAR ===
   const heading = lang === "en" ? (
     <>Community <em className="italic font-serif">Love</em></>
   ) : (
@@ -120,7 +245,6 @@ export default function TestimonialsSection() {
       <Container>
         <div className="mx-auto max-w-6xl text-center">
           
-          {/* Badge */}
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -130,7 +254,6 @@ export default function TestimonialsSection() {
             {t.testimonials.badge}
           </motion.span>
 
-          {/* Heading */}
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -207,7 +330,6 @@ export default function TestimonialsSection() {
 
           </div>
 
-          {/* Footer Badge */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -241,26 +363,21 @@ function CarouselTrack({ items }: { items: TestimonialItem[] }) {
       `}</style>
 
       {items.map((tt, i) => (
-        // `flex` eklendi ki içindeki h-full işe yarasın
         <div 
           key={i} 
           className="carousel-item flex flex-shrink-0 px-3"
         >
-          {/* DEĞİŞİKLİKLER BURADA:
-              1. 'flex flex-col' eklendi: İçerikleri dikey dizebilmek için.
-              2. 'h-full' zaten vardı, flex container içinde tüm kartları eşitler.
-          */}
           <div className="group relative flex h-full w-full flex-col overflow-hidden rounded-[32px] border border-white/40 bg-white/60 p-8 text-left shadow-xl shadow-neutral-200/40 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-2xl hover:ring-1 hover:ring-neutral-300">
             
-            {/* Dekoratif Tırnak İşareti */}
             <div className="absolute right-6 top-6 opacity-10 transition-opacity group-hover:opacity-20">
               <Quote className="h-16 w-16 text-neutral-900" />
             </div>
 
-            {/* İkon */}
             <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-neutral-100">
               {tt.source === 'youtube' && <Youtube className="h-6 w-6 text-red-600" />}
               {tt.source === 'instagram' && <Instagram className="h-6 w-6 text-pink-600" />}
+              {/* TikTok için özel SVG Component Kullanımı */}
+              {tt.source === 'tiktok' && <TikTokIcon className="h-6 w-6 text-black" />} 
               {tt.source === 'like' && <ThumbsUp className="h-6 w-6 text-blue-500" />}
             </div>
 
@@ -268,20 +385,10 @@ function CarouselTrack({ items }: { items: TestimonialItem[] }) {
               {tt.quote}
             </h3>
             
-            {/* DEĞİŞİKLİK:
-                Yazı alanı otomatik büyümezse alt kısım yukarı kayar.
-                Ancak biz alt kısmı 'mt-auto' ile iteceğimiz için burası esnek kalabilir.
-            */}
             <p className="relative z-10 mt-3 text-sm leading-relaxed text-neutral-600">
               {tt.desc}
             </p>
 
-            {/* DEĞİŞİKLİK: 'mt-auto' EKLENDİ.
-                Bu komut, üstteki içerik (yazı, başlık) ne kadar kısa olursa olsun,
-                bu footer div'ini kartın en altına iter.
-                Kartların hepsi aynı yükseklikte olduğu için (h-full),
-                çizgiler ip gibi hizalanır.
-            */}
             <div className="relative z-10 mt-auto flex items-center gap-3 border-t border-neutral-200/50 pt-5">
               <div className="h-10 w-10 overflow-hidden rounded-full ring-2 ring-white">
                 {/* eslint-disable-next-line @next/next/no-img-element */}

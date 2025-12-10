@@ -101,7 +101,7 @@ export default function ContactPage() {
       
       {/* Footer Yıl Bilgisi */}
       <div className="absolute bottom-8 text-center text-xs text-neutral-400">
-        <p>Istanbul, TR • {new Date().getFullYear()}</p>
+        <p> ©  {new Date().getFullYear()} ErayTechs. Tüm hakları saklıdır. </p>
       </div>
     </main>
   );

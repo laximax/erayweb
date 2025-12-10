@@ -24,6 +24,7 @@ export type Translations = {
     tabs: { links: string; social: string; shop: string };
     items: { website: string; gear: string; presets: string };
     cta: { open: string; copy: string; copied: string };
+    footerText: string; // ✅ items DIŞINDA, doğru yerde
   };
 
   footer: {
@@ -35,18 +36,16 @@ export type Translations = {
     copy: (year: number) => string;
   };
 
-  // ✅ YENİ İLETİŞİM SAYFASI İÇİN GÜNCELLENEN ALAN
   contact: {
-    badge: string;        // İş Birlikleri İçin Açık
-    titlePart1: string;   // Birlikte
-    titlePart2: string;   // Çalışalım
-    desc: string;         // Açıklama metni
-    emailLabel: string;   // E-posta Adresi etiketi
-    copied: string;       // Kopyalandı uyarısı
-    openMail: string;     // Mail uygulamasında aç
+    badge: string;
+    titlePart1: string;
+    titlePart2: string;
+    desc: string;
+    emailLabel: string;
+    copied: string;
+    openMail: string;
   };
 
-  // MediaKit
   mediakit: {
     name: string;
     verified: string;
@@ -93,7 +92,7 @@ export const dict: Record<Lang, Translations> = {
       back: "Home Page",
       contact: "Contact",
       mediakit: "Media Kit",
-      prompts: "Prompts",
+      prompts: "AI Lab",
     },
     hero: {
       title:
@@ -103,22 +102,22 @@ export const dict: Record<Lang, Translations> = {
     benefits: {
       badge: "Partnership Value",
       heading: "Why partner with me?",
-      blurb: "I bridge the gap between complex tech and consumer trust.",
+      blurb: "I explain technology with a voice consumers trust.",
       cards: [
         {
-          title: "Viral Storytelling",
-          desc: "I craft high-retention hooks and narratives that stop the scroll and keep audiences watching.",
-          tag: "High Engagement & Reach",
+          title: "Viral Potential",
+          desc: "I deliver your brand's message naturally to a broad audience, using dynamic editing styles that master social media dynamics.",
+          tag: "Organic Growth",
         },
         {
-          title: "Trusted Authority",
-          desc: "My audience isn't just watching; they are listening. I built a community that trusts my technical verdict.",
+          title: "Targeted Reach",
+          desc: "I engage with a qualified community that is tech-savvy, loves innovation, and genuinely trusts my recommendations.",
           tag: "Brand Safety & Trust",
         },
         {
-          title: "Conversion Focused",
-          desc: "Content designed not just for views, but to drive downloads, sales, and real user action.",
-          tag: "ROI & Results",
+          title: "Tangible Results",
+          desc: "I focus on performance driving not just visibility, but real engagement, traffic, and demand for your brand.",
+          tag: "ROI & Performance",
         },
       ],
     },
@@ -134,8 +133,9 @@ export const dict: Record<Lang, Translations> = {
         website: "Official Website",
         gear: "Creator Gear List",
         presets: "PC Optimize Presets",
-      },
+      }, // ✅ items burada kapandı
       cta: { open: "Open", copy: "Copy Link", copied: "Copied!" },
+      footerText: "All my digital world in one place.", // ✅ items ile kardeş
     },
 
     footer: {
@@ -143,11 +143,11 @@ export const dict: Record<Lang, Translations> = {
       ctaTitle: "Great collaborations begin with a conversation",
       ctaButton: "Get In Touch",
       about: "Technology & Digital Content.",
-      about2: "Bridging the gap between complex tech and daily life.",
+      about2:
+        "Let's take the first step together to introduce your product or service to the right audience in the clearest way possible.",
       copy: (year) => `© ${year} ErayTechs. All rights reserved.`,
     },
 
-    // ✅ ENGLISH TRANSLATIONS FOR NEW CONTACT PAGE
     contact: {
       badge: "Available for Collaboration",
       titlePart1: "Let's Work",
@@ -164,8 +164,7 @@ export const dict: Record<Lang, Translations> = {
       country: "Turkey",
       language: "Turkish / English",
       category: "Tech & Creator Tools",
-      bio:
-        "I create high-impact tech content focused on PC optimization, AI workflows and creator tools. My style blends clarity, speed and practical value.",
+      bio: "I create high impact content focused on technology, digital solutions, AI workflows, and everyday user needs. My communication style is clear, fast, and directly actionable. My goal is to make technology understandable and accessible for everyone while helping brands deliver their message to the right audience.",
       reach: "Monthly Reach",
       cta: "Work with me",
 
@@ -223,7 +222,7 @@ export const dict: Record<Lang, Translations> = {
       back: "Ana Sayfaya Dön",
       contact: "İletişim",
       mediakit: "Medya Kiti",
-      prompts: "Promptlar",
+      prompts: "AI Lab",
     },
     hero: {
       title:
@@ -233,22 +232,22 @@ export const dict: Record<Lang, Translations> = {
     benefits: {
       badge: "İş Birliği Değeri",
       heading: "Neden benimle çalışmalısın?",
-      blurb: "Karmaşık teknolojiyi, tüketicinin güven duyduğu bir dille anlatıyorum.",
+      blurb: "Teknolojiyi tüketicinin güven duyduğu bir dille anlatıyorum.",
       cards: [
         {
-          title: "Viral Hikaye Anlatımı",
-          desc: "Kaydırmayı durduran kancalar (hooks) ve izleyiciyi videoda tutan akıcı kurgular üretiyorum.",
-          tag: "Yüksek Etkileşim & Erişim",
+          title: "Viral Potansiyel",
+          desc: "Sosyal medya dinamiklerine hakim kurgularla, markanızın mesajını geniş kitlelere en doğal haliyle ulaştırıyorum.",
+          tag: "Organik Büyüme",
         },
         {
-          title: "Güvenilir Otorite",
-          desc: "Kitlem sadece izlemiyor, dinliyor. Teknik önerilerime güvenen sadık bir topluluk inşa ettim.",
+          title: "Doğru Kitle",
+          desc: "Teknolojiye meraklı, yenilikleri seven ve önerilerime değer veren nitelikli bir topluluğa hitap ediyorum.",
           tag: "Marka Güvenliği & İtibar",
         },
         {
-          title: "Dönüşüm Odaklı",
-          desc: "Sadece izlenme (vanity metrics) değil; indirme, satış ve gerçek kullanıcı hareketi getiren içerikler.",
-          tag: "ROI & Gerçek Sonuçlar",
+          title: "Somut Sonuçlar",
+          desc: "Markanız için sadece görünürlük değil; etkileşim, trafik ve talep oluşturan performans odaklı çalışıyorum.",
+          tag: "ROI & Performans",
         },
       ],
     },
@@ -264,8 +263,9 @@ export const dict: Record<Lang, Translations> = {
         website: "Resmi Web Sitesi",
         gear: "Ekipman Listem",
         presets: "PC Hızlandırma Ayarları",
-      },
+      }, // ✅ items burada kapandı
       cta: { open: "Aç", copy: "Linki Kopyala", copied: "Kopyalandı!" },
+      footerText: "Tüm dijital dünyam tek bir yerde.", // ✅ items ile kardeş ve Türkçe
     },
 
     footer: {
@@ -273,11 +273,11 @@ export const dict: Record<Lang, Translations> = {
       ctaTitle: "Harika işler bir sohbetle başlar",
       ctaButton: "İletişime Geç",
       about: "Teknoloji & Dijital İçerik.",
-      about2: "Karmaşık teknolojiyi günlük yaşamla buluşturuyoruz.",
+      about2:
+        "Ürün veya hizmetinizi en doğru kitleye, en anlaşılır dille anlatmak için ilk adımı birlikte atalım.",
       copy: (year) => `© ${year} ErayTechs. Tüm hakları saklıdır.`,
     },
 
-    // ✅ YENİ İLETİŞİM SAYFASI İÇİN TÜRKÇE ÇEVİRİLER
     contact: {
       badge: "İş Birlikleri İçin Açık",
       titlePart1: "Birlikte",
@@ -294,8 +294,7 @@ export const dict: Record<Lang, Translations> = {
       country: "Türkiye",
       language: "Türkçe / İngilizce",
       category: "Teknoloji & Creator Araçları",
-      bio:
-        "PC optimizasyonu, yapay zekâ iş akışları ve creator araçları odağında yüksek etkili teknoloji içerikleri üretiyorum. Anlatımım net, hızlı ve uygulanabilir.",
+      bio: " Teknoloji, dijital çözümler, yapay zeka iş akışları ve günlük kullanıcı ihtiyaçlarına yönelik yüksek etkili içerikler üretiyorum. Anlatımım net, hızlı ve doğrudan uygulanabilir. Hedefim, teknolojiyi herkes için anlaşılır ve erişilebilir kılarak markaların mesajlarını doğru kitleyle buluşturmak.",
       reach: "Aylık Erişim",
       cta: "Benimle çalış",
 
@@ -309,7 +308,11 @@ export const dict: Record<Lang, Translations> = {
       },
       pack2: {
         title: "Paket",
-        items: ["3x kısa video", "Çapraz paylaşım", "Temel performans raporu"],
+        items: [
+          "3x kısa video",
+          "Çapraz paylaşım",
+          "Temel performans raporu",
+        ],
       },
       pack3: {
         title: "Özel İş Birliği",

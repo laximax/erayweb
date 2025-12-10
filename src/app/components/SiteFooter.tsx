@@ -47,7 +47,7 @@ export default function SiteFooter() {
             <div>
               <div className="text-lg font-semibold">
                 {t.brand}
-                <span className="align-super text-[10px] opacity-70">®</span>
+                <span className="align-super text-[10px] opacity-70">™</span>
               </div>
               <p className="mt-3 max-w-sm text-sm leading-6 text-neutral-600">
                 {t.footer.about}

@@ -6,18 +6,22 @@ import { useEffect, useState } from "react";
 import { useLang } from "../components/LangProvider"; // Yolun doğru olduğundan emin olun
 import { Menu, X } from "lucide-react";
 
-const SECTIONS = ["benefits", "testimonials"] as const;
+const SECTIONS = ["collaboration", "testimonials"] as const;
 type Sec = (typeof SECTIONS)[number];
 
 export default function TopNavPill() {
   const pathname = usePathname();
   const { lang, setLang, t } = useLang();
 
-  const isStandalone =
+   const isContactLike =
     pathname?.startsWith("/contact") ||
     pathname?.startsWith("/links") ||
-    pathname?.startsWith("/mediakit") ||
-     pathname?.startsWith("/prompts");
+     pathname?.startsWith("/prompts") ||
+    pathname?.startsWith("/legal");
+
+  const isMediaKit = pathname?.startsWith("/mediakit");
+
+  const isStandalone = isContactLike || isMediaKit;
 
   const [active, setActive] = useState<Sec | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -80,7 +84,7 @@ export default function TopNavPill() {
 const brandLink = (
       <Link href="/" className="shrink-0 whitespace-nowrap font-semibold text-white">
       {t.brand}
-      <span className="align-super text-[10px] opacity-70">®</span>
+      <span className="align-super text-[10px] opacity-70">™</span>
     </Link>
   );
   return (
@@ -108,30 +112,15 @@ const brandLink = (
               {t.nav.back}
             </Link>
         
-
+               {isMediaKit && (
               <Link
-              href="/mediakit"
-              onClick={handleNavClick}
-              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
-            >
-              {t.nav.mediakit}
-            </Link>
-
-            <Link
-              href="/prompts"
-              onClick={handleNavClick}
-              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
-            >
-              {t.nav.prompts}
-            </Link>
-
-            <Link
               href="/contact"
-              onClick={handleNavClick}
-              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
-            >
-              {t.nav.contact}
-            </Link>
+                onClick={handleNavClick}
+                className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+              >
+                {t.nav.contact}
+              </Link>
+            )}
 
                <div className="ml-auto w-full min-[420px]:w-auto">{languageSwitcher}</div>
           </div>
@@ -158,7 +147,7 @@ const brandLink = (
               }`}
             >
               <div className="flex flex-col gap-2">
-                <a href="#benefits" className={linkCls("benefits")} onClick={handleNavClick}>
+                <a href="#collaboration" className={linkCls("collaboration")} onClick={handleNavClick}>
                   {t.nav.benefits}
                 </a>
                 
@@ -215,7 +204,7 @@ const brandLink = (
         {/* 1. Logo (En Solda) */}
         <Link href="/" className="shrink-0 font-semibold text-white whitespace-nowrap mr-6 lg:mr-8">
           {t.brand}
-          <span className="align-super text-[10px] opacity-70">®</span>
+          <span className="align-super text-[10px] opacity-70">™</span>
         </Link>
 
         {/* 2. Linkler (Ortada / Solda Logo'nun yanında) */}
@@ -228,28 +217,18 @@ const brandLink = (
             >
               {t.nav.back}
             </Link>
-             <Link
-              href="/mediakit"
-              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
-            >
-              {t.nav.mediakit}
-            </Link>
-            <Link
-              href="/prompts"
-              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
-            >
-              {t.nav.prompts}
-            </Link>
-            <Link
-              href="/contact"
-              className="whitespace-nowrap text-neutral-300 transition hover:text-white"
-            >
-              {t.nav.contact}
-            </Link>
+             {isMediaKit && (
+              <Link
+                href="/contact"
+                className="whitespace-nowrap text-neutral-300 transition hover:text-white"
+              >
+                {t.nav.contact}
+              </Link>
+            )}
           </div>
         ) : (
           <div className="flex items-center gap-6 lg:gap-8">
-            <a href="#benefits" className={linkCls("benefits")}>
+            <a href="#collaboration" className={linkCls("collaboration")}>
               {t.nav.benefits}
             </a>
           

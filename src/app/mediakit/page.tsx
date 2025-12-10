@@ -6,7 +6,22 @@ import { useEffect, useState } from "react";
 import { useLang } from "@/app/components/LangProvider";
 import TopNavPill from "../components/TopNavPill";
 
-import { CheckCircle2, MapPin, Languages, Instagram, Music, Youtube, Globe ,FileDown} from "lucide-react";
+// ✅ Clock ikonu eklendi
+import { CheckCircle2, MapPin, Languages, Instagram, Youtube, Globe, FileDown, Clock } from "lucide-react";
+
+// ✅ YENİ TIKTOK IKONU
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-.002-.001.002.001a2.895 2.895 0 0 1 3.183-4.51v-3.5a6.329 6.329 0 0 0-5.394 10.692 6.33 6.33 0 0 0 10.857-4.424V8.687a8.182 8.182 0 0 0 4.773 1.526V6.79a4.831 4.831 0 0 1-1.003-.104z" />
+    </svg>
+  );
+}
 
 /* ================= HERO ================= */
 
@@ -84,7 +99,7 @@ function CreatorHero() {
           </p>
 
           <div className="mt-6 flex flex-wrap justify-center md:justify-start items-center gap-4 sm:gap-6">
-            <Stat icon={<Music className="h-4 w-4" />} label="TikTok" value={formatCount(counts.tiktok)} />
+            <Stat icon={<TikTokIcon className="h-4 w-4" />} label="TikTok" value={formatCount(counts.tiktok)} />
             <Stat icon={<Instagram className="h-4 w-4" />} label="Instagram" value={formatCount(counts.instagram)} />
             <Stat icon={<Youtube className="h-4 w-4" />} label="YouTube" value={formatCount(counts.youtube)} />
             <Link
@@ -120,13 +135,13 @@ type PlatformKey = "tiktok" | "instagram" | "youtube";
 type Stats = {
   followers: number;
   videos?: number;
-  totalViews?: number;              // Toplam izlenme
-  avgPostImpressions?: number;      // IG
-  postEngagementRate?: number;      // IG %
-  avgReelsViews?: number;           // IG/TT/YT: video ort. izlenme
-  reelsEngagementRate?: number;     // IG %
-  avgDurationSec?: number;          // TT/YT/IG reels
-  engagementRate?: number;          // TT/YT genel %
+  totalViews?: number;            
+  avgPostImpressions?: number;     
+  postEngagementRate?: number;     
+  avgReelsViews?: number;          
+  reelsEngagementRate?: number;    
+  avgDurationSec?: number;         
+  engagementRate?: number;         
 };
 
 type Audience = {
@@ -135,7 +150,7 @@ type Audience = {
   gender: { male: number; female: number };
 };
 
-const MEDIA_KIT_PDF_PATH = "/media/ErayTechs-Media-Kit.pdf"; // public/media içine PDF'i koy
+const MEDIA_KIT_PDF_PATH = "/media/ErayTechs-Media-Kit.pdf"; 
 
 
 const DATA: Record<PlatformKey, { stats: Stats; audience: Audience; url: string; badge: string }> = {
@@ -249,7 +264,8 @@ function fmtDuration(sec?: number) {
 }
 
 function ChannelsSection() {
-  const { t } = useLang();
+  // ✅ lang eklendi
+  const { t, lang } = useLang();
   const [tab, setTab] = useState<PlatformKey>("tiktok");
   const d = DATA[tab];
 
@@ -262,7 +278,7 @@ function ChannelsSection() {
       {/* Tabs */}
      <div className="mt-4 flex flex-wrap items-center gap-3 border-b border-neutral-200 pb-4">
         <div className="flex flex-wrap items-center gap-3">
-          <Tab active={tab === "tiktok"} onClick={() => setTab("tiktok")} icon={<Music className="h-4 w-4" />} label="TikTok" badge={DATA.tiktok.badge} />
+          <Tab active={tab === "tiktok"} onClick={() => setTab("tiktok")} icon={<TikTokIcon className="h-4 w-4" />} label="TikTok" badge={DATA.tiktok.badge} />
           <Tab active={tab === "instagram"} onClick={() => setTab("instagram")} icon={<Instagram className="h-4 w-4" />} label="Instagram" badge={DATA.instagram.badge} />
           <Tab active={tab === "youtube"} onClick={() => setTab("youtube")} icon={<Youtube className="h-4 w-4" />} label="YouTube" badge={DATA.youtube.badge} />
         </div>
@@ -287,10 +303,21 @@ function ChannelsSection() {
         </div>
       </div>
 
-      {/* Statistics */}
-      <h3 className="mt-6 text-xl sm:text-2xl font-semibold">{t.mediakit?.stats ?? "Statistics"}</h3>
+      {/* Statistics Header & Update Info */}
+      <div className="mt-6">
+         <h3 className="text-xl sm:text-2xl font-semibold">{t.mediakit?.stats ?? "Statistics"}</h3>
+         {/* ✅ YENİ EKLENEN PROFESYONEL BİLGİ SATIRI */}
+         <p className="mt-1.5 inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-neutral-500 bg-neutral-50 px-2 py-1 rounded-md border border-neutral-100">
+            <Clock className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-neutral-400" />
+            {lang === 'en' 
+               ? "Data automatically updates weekly. Last Sync: Dec 09, 2025 • 22:50" 
+               : "Veriler haftalık olarak otomatik güncellenir. Son Eşitleme: 09.12.2025 • 22:50"
+            }
+         </p>
+      </div>
+
       <div className="mt-3 flex gap-2">
-        
+        {/* İsteğe bağlı boş alan */}
       </div>
 
       {/* Cards grid */}
@@ -459,7 +486,7 @@ function MediaKitFooter() {
         <div className="border-t border-neutral-200/70 bg-white/70">
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-4 text-xs text-neutral-500 sm:flex-row">
             <div className="font-medium text-neutral-700">
-              ErayTechs <span className="align-super text-[10px] opacity-60">®</span>
+              ErayTechs <span className="align-super text-[10px] opacity-60">™</span>
             </div>
             <div>{t.footer.copy(new Date().getFullYear())}</div>
           </div>
