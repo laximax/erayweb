@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLang } from "@/app/components/LangProvider";
 import TopNavPill from "../components/TopNavPill";
+import { DATA, PlatformKey, Stats } from "../mediaKitData";
 
 // ✅ Clock ikonu eklendi
 import { CheckCircle2, MapPin, Languages, Instagram, Youtube, Globe, FileDown, Clock } from "lucide-react";
@@ -110,21 +111,21 @@ function CreatorHero() {
           </p>
 
           <div className="mt-6 flex flex-wrap justify-center md:justify-start items-center gap-4 sm:gap-6">
-            <Stat 
-  icon={<Instagram className="h-4 w-4" />} 
-  label={platformLabels.instagram} 
-  value={formatCount(DATA.instagram.stats.followers)} // Burayı DATA'dan çekiyoruz
+             <Stat
+  icon={<Instagram className="h-4 w-4" />}
+  label={platformLabels.instagram}
+  value={formatCount(counts.instagram ?? DATA.instagram.stats.followers)} 
 />
-            <Stat 
-  icon={<TikTokIcon className="h-4 w-4" />} 
-  label={platformLabels.tiktok} 
-  value={formatCount(DATA.tiktok.stats.followers)} // Burayı DATA'dan çekiyoruz
+            <Stat
+  icon={<TikTokIcon className="h-4 w-4" />}
+  label={platformLabels.tiktok}
+  value={formatCount(counts.tiktok ?? DATA.tiktok.stats.followers)} 
 />
 
-<Stat 
-  icon={<Youtube className="h-4 w-4" />} 
-  label={platformLabels.youtube} 
-  value={formatCount(DATA.youtube.stats.followers)} // Burayı DATA'dan çekiyoruz
+<Stat
+  icon={<Youtube className="h-4 w-4" />}
+  label={platformLabels.youtube}
+  value={formatCount(counts.youtube ?? DATA.youtube.stats.followers)} 
 />
             <Link
               href="/contact"
@@ -152,152 +153,21 @@ function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; va
   );
 }
 
-/* ================ CHANNELS (statik) ================ */
 
-type PlatformKey = "tiktok" | "instagram" | "youtube";
-
-type Stats = {
-  followers: number;
-  videos?: number;
-  totalViews?: number;            
-  avgPostImpressions?: number;     
-  postEngagementRate?: number;     
-  avgReelsViews?: number;            
-  avgDurationSec?: number;         
-  engagementRate?: number;         
-};
-
-type Audience = {
-  location: { label: string; value: number }[];
-  age: { label: string; value: number }[];
-  gender: { male: number; female: number };
-};
-
-const MEDIA_KIT_PDF_PATH = "/media/ErayTechs-Media-Kit.pdf"; 
-
-
-const DATA: Record<PlatformKey, { stats: Stats; audience: Audience; url: string; badge: string }> = {
-  tiktok: {
-    url: "https://www.tiktok.com/@eraytechs",
-    badge: "2.3K",
-    stats: {
-      followers: 2300,
-      videos: 39,
-      totalViews: 2_100_000,
-      avgReelsViews: 18_200,
-      engagementRate: 2.25,
-      
-    },
-    audience: {
-      location: [
-        { label: "Türkiye", value: 94.6 },
-        { label: "Azerbaycan", value: 1.6 },
-        { label: "Diğer", value: 1.5 },
-        { label: "Almanya", value: 0.8 },
-        { label: "Bulgaristan", value: 0.5 },
-        { label: "Avusturya", value: 0.2 },
-        { label: "Hollanda", value: 0.2 },
-        { label: "Gürcistan", value: 0.2 },
-        { label: "Yunanistan", value: 0.2 },
-        { label: "Suudi Arabistan", value: 0.1 },
-        { label: "Kuzey Makedonya", value: 0.1 },
-      ],
-      age: [
-        { label: "18–24", value: 26.4 },
-        { label: "25–34", value: 34.8 },
-        { label: "35–44", value: 19.6 },
-        { label: "45–54", value: 12.9 },
-        { label: "55+", value: 6.3 },
-      ],
-      gender: { male: 85.0, female: 15.0 },
-    },
-  },
-  instagram: {
-    url: "https://instagram.com/eraytechs",
-    badge: "8.3K",
-    stats: {
-      followers: 8_305,
-      videos: 37,
-      totalViews: 7_201_720,
-      avgPostImpressions: 187_056,
-      postEngagementRate: 1.74,
-      
-      
-    },
-    audience: {
-      location: [
-        { label: "Türkiye", value: 92.3 },
-        { label: "Almanya", value: 1.6 },
-        { label: "Azerbaycan", value: 1.5 },
-        { label: "Kıbrıs", value: 0.6 },
-        { label: "Hindistan", value: 0.4 },
-        
-        
-      ],
-      age: [
-        { label: "13–17", value: 7.4 },
-        { label: "18–24", value: 19.8 },
-        { label: "25–34", value: 32.2 },
-        { label: "35–44", value: 20.7 },
-        { label: "45–54", value: 13.1 },
-        { label: "55–64", value: 55.64 },
-        { label: "65+", value: 2.3 },
-      ],
-      gender: { male: 94.8, female: 5.2 },
-    },
-  },
-  youtube: {
-    url: "https://youtube.com/@eraytechs",
-    badge: "474",
-    stats: {
-      followers: 474,
-      videos: 40,
-      totalViews: 525_864,
-      avgReelsViews: 13_146_3,
-       
-      
-      
-    },
-    audience: {
-      location: [
-        { label: "Türkiye", value: 91.0 },
-        { label: "Azerbaycan", value: 2.9 },
-        { label: "Hollanda", value: 0.5 },
-        { label: "Kıbrıs", value: 0.2 },
-        { label: "ABD", value: 0.2 },
-        { label: "Fransa", value: 0.1 },
-        { label: "Birleşik Krallık", value: 0.1 },
-        { label: "Bulgaristan", value: 0.1 },
-        { label: "Avusturya", value: 0.1 },
-        
-      ],
-      age: [
-        { label: "13–17", value: 5.3 },
-        { label: "18–24", value: 24.8 },
-        { label: "25–34", value: 41.7 },
-        { label: "35–44", value: 18.7 },
-        { label: "45–54", value: 7.6 },
-        { label: "55–64", value: 1.0 },
-        { label: "65+", value: 0.8 },
-       
-      ],
-      gender: { male: 91, female: 9 },
-    },
-  },
-};
 
 function fmt(n: number) {
   if (n < 1_000) return n.toString();
   if (n < 1_000_000) return (n / 1_000).toFixed(n % 1_000 === 0 ? 0 : 1) + "K";
   return (n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1) + "M";
 }
-function fmtDuration(sec?: number) {
-  if (sec == null) return "—";
-  const m = Math.floor(sec / 60);
-  const s = sec % 60;
-  return `${m}m ${s}s`;
-}
 
+function calculateAverageViews(stats: Stats) {
+  if (stats.totalViews != null && stats.videos != null && stats.videos > 0) {
+    return stats.totalViews / stats.videos;
+  }
+
+  return stats.avgReelsViews;
+}
 function ChannelsSection() {
   // ✅ lang eklendi
   const { t } = useLang();
@@ -307,7 +177,8 @@ function ChannelsSection() {
 
   const tabLabel = platformLabels[tab];
 
-  const avgViewsLabel = tab === "instagram" ? t.mediakit.avgReelsViews : t.mediakit.avgVideoViews;
+ const averageViews = calculateAverageViews(d.stats);
+  const avgViewsLabel = t.mediakit.avgVideoViews;
 
   return (
     <section className="mx-auto mt-12 w-full max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -328,16 +199,7 @@ function ChannelsSection() {
           >
             {t.mediakit.goTo(tabLabel)}
           </a>
-          <a
-            href={MEDIA_KIT_PDF_PATH}
-            download
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50 sm:w-auto"
-            aria-label="Download Media Kit as PDF"
-          >
-            <FileDown className="h-4 w-4" />
-            <span className="hidden sm:inline">{t.mediakit.downloadPdf}</span>
-            <span className="sm:hidden">{t.mediakit.downloadPdfShort}</span>
-          </a>
+          
         </div>
       </div>
 
@@ -361,7 +223,7 @@ function ChannelsSection() {
           <StatCard title={t.mediakit?.followers ?? "Followers"} value={fmt(d.stats.followers)} />
           <StatCard title={t.mediakit?.posts ?? "Posts"} value={d.stats.videos?.toString() ?? "—"} />
         <StatCard title={t.mediakit.totalViews} value={d.stats.totalViews ? fmt(d.stats.totalViews) : "—"} />
-          <StatCard title={t.mediakit.avgPostImpressions} value={d.stats.avgPostImpressions ? fmt(d.stats.avgPostImpressions) : "—"} />
+         <StatCard title={avgViewsLabel} value={averageViews != null ? fmt(averageViews) : "—"} />       
           <StatCard title={t.mediakit.postEngagementRate} value={d.stats.postEngagementRate != null ? `${d.stats.postEngagementRate.toFixed(2)}%` : "—"} />
           
         </div>
@@ -370,7 +232,7 @@ function ChannelsSection() {
           <StatCard title={t.mediakit?.followers ?? "Followers"} value={fmt(d.stats.followers)} />
           <StatCard title={t.mediakit?.posts ?? "Posts"} value={d.stats.videos?.toString() ?? "—"} />
            <StatCard title={t.mediakit.totalViews} value={d.stats.totalViews ? fmt(d.stats.totalViews) : "—"} />
-          <StatCard title={avgViewsLabel} value={d.stats.avgReelsViews ? fmt(d.stats.avgReelsViews) : "—"} />
+          <StatCard title={avgViewsLabel} value={averageViews != null ? fmt(averageViews) : "—"} />
           <StatCard title={t.mediakit?.engagementRate ?? "Engagement Rate"} value={d.stats.engagementRate != null ? `${d.stats.engagementRate.toFixed(2)}%` : "—"} />
           
         </div>

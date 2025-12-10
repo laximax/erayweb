@@ -113,7 +113,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ response: botResponse });
 
-  } catch (error) {
+  } catch  {
     return NextResponse.json({ response: "Bir hata oluştu, lütfen tekrar dene." }, { status: 500 });
   }
 }

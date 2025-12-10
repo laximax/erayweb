@@ -188,12 +188,12 @@ export const dict: Record<Lang, Translations> = {
       goTo: (platform: string) => `Go to ${platform} ↗`,
       downloadPdf: "Download Media Kit (PDF)",
       downloadPdfShort: "Media Kit PDF",
-      totalViews: "Total Views",
+      totalViews: "Total Views in the Last 90 Days",
       avgPostImpressions: "Avg Post Impressions",
       postEngagementRate: "Post Engagement Rate",
       avgReelsViews: "Avg Reels Views",
       avgVideoViews: "Avg Video Views",
-      dataRefresh: "Data automatically updates weekly. Last Sync: Dec 09, 2025 • 22:50",
+      dataRefresh: "Data automatically updates weekly. Last Sync: Dec 11, 2025 • 00:20",
 
       meet: "MEET THE CREATOR",
       meetText:
@@ -338,7 +338,7 @@ export const dict: Record<Lang, Translations> = {
       postEngagementRate: "Gönderi Etkileşim Oranı",
       avgReelsViews: "Reels Ortalama İzlenme",
       avgVideoViews: "Video Ortalama İzlenme",
-      dataRefresh: "Veriler haftalık olarak otomatik güncellenir. Son Eşitleme: 09.12.2025 • 22:50",
+      dataRefresh: "Veriler haftalık olarak otomatik güncellenir. Son Eşitleme: 11.12.2025 • 00:20",
 
       meet: "CREATOR İLE TANIŞ",
       meetText:

@@ -186,7 +186,7 @@ export default function AiAssistant() {
         ...prev,
         { id: Date.now() + 1, text: data.response, sender: "bot" },
       ]);
-    } catch (error) {
+    } catch  {
       // Hata durumunda
       setMessages((prev) => [
         ...prev,
