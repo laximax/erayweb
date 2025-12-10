@@ -290,8 +290,8 @@ function ChannelsSection() {
       {/* Tabs */}
      <div className="mt-4 flex flex-wrap items-center gap-3 border-b border-neutral-200 pb-4">
         <div className="flex flex-wrap items-center gap-3">
-         <Tab active={tab === "tiktok"} onClick={() => setTab("tiktok")} icon={<TikTokIcon className="h-4 w-4" />} label={platformLabels.tiktok} badge={DATA.tiktok.badge} />
           <Tab active={tab === "instagram"} onClick={() => setTab("instagram")} icon={<Instagram className="h-4 w-4" />} label={platformLabels.instagram} badge={DATA.instagram.badge} />
+           <Tab active={tab === "tiktok"} onClick={() => setTab("tiktok")} icon={<TikTokIcon className="h-4 w-4" />} label={platformLabels.tiktok} badge={DATA.tiktok.badge} />
           <Tab active={tab === "youtube"} onClick={() => setTab("youtube")} icon={<Youtube className="h-4 w-4" />} label={platformLabels.youtube} badge={DATA.youtube.badge} />
         </div>
         <div className="flex w-full flex-col gap-2 sm:ml-auto sm:w-auto sm:flex-row sm:items-center">

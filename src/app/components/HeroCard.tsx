@@ -6,10 +6,10 @@ import { useLang } from "../components/LangProvider";
 
 export default function HeroCard() {
   const { lang } = useLang();
- const taglineText = lang === "en" ? "Technology & Digital Content." : "Teknoloji & Dijital İçerik.";
+  const taglineText = lang === "en" ? "Technology & Digital Content." : "Teknoloji & Dijital İçerik.";
+  
   return (
-    // Mobilde üst boşluğu biraz kıstık (mt-28), büyük ekranda açtık
-     <section className="mt-24 sm:mt-32 mb-10 sm:mb-16 lg:mb-20">
+      <section className="mt-24 sm:mt-32 mb-10 sm:mb-16 lg:mb-20">
       <Container>
         {/* Kart Ana Yapısı */}
         <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] bg-neutral-900 shadow-2xl ring-1 ring-white/10">
@@ -17,7 +17,7 @@ export default function HeroCard() {
           {/* === Arka Plan Görseli === */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="/hero.png"
+              src="/eraytechs.png"
               alt="ErayTechs hero"
               fill
               priority
@@ -25,7 +25,6 @@ export default function HeroCard() {
               quality={90}
               className="object-cover opacity-100"
             />
-            {/* Gradient Overlay: Mobilde alttan, masaüstünde sağdan karartma */}
             <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-black/90 via-black/50 to-transparent lg:from-black/80 lg:via-black/40" />
           </div>
 
@@ -41,7 +40,6 @@ export default function HeroCard() {
             {/* Sol Taraf: Büyük Marka İsmi */}
             <div className="order-1 flex flex-col justify-center text-center lg:order-1 lg:col-span-7 lg:text-left">
               <h1 className="leading-none font-bold tracking-tighter text-white">
-                {/* Responsive Font Boyutları */}
                  <span className="block text-[clamp(2.8rem,9vw,6.5rem)] sm:text-[clamp(3.5rem,7vw,7rem)] lg:text-[clamp(5rem,8vw,100px)] xl:text-[110px] 2xl:text-[130px]">
                   ERAY
                 </span>
@@ -49,12 +47,10 @@ export default function HeroCard() {
                   TECHS
                 </span>
               </h1>
-              
-                
             </div>
-
-             {/* Mobil: Sosyal ikonlar ve metin bir arada, aradaki boşluk azaltıldı */}
-            <div className="order-2 flex w-full flex-col items-center gap-3 sm:gap-4 lg:hidden">
+               
+             {/* === MOBİL İÇERİK KISMI (mt-46 korundu) === */}
+             <div className="order-2 flex w-full flex-col items-center gap-3 sm:gap-4 lg:hidden mt-46 sm:mt-0">
               <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
 
                 <SocialBtn
@@ -80,6 +76,7 @@ export default function HeroCard() {
                 {taglineText}
               </p>
             </div>
+             
 
             {/* Masaüstü: Sosyal medya butonları */}
             <div className="order-3 hidden items-end justify-center lg:order-3 lg:col-span-5 lg:flex lg:h-full lg:justify-end lg:pb-4">
@@ -105,7 +102,14 @@ export default function HeroCard() {
 
               </div>
             </div>
-              <p className="order-4 hidden lg:order-2 lg:block mx-auto max-w-2xl text-center text-base text-neutral-300 text-shadow-sm font-medium sm:text-lg lg:mx-0 lg:col-span-7 lg:text-left lg:text-xl lg:leading-relaxed lg:mt-4">
+
+             {/* === MASAÜSTÜ YAZI ALANI DÜZELTMESİ ===
+                DEĞİŞİKLİKLER:
+                1. lg:mt-8 KALDIRILDI (Hizayı bozuyordu).
+                2. lg:self-end EKLENDİ (Yazıyı kapsayıcının en altına iter).
+                3. lg:pb-4 EKLENDİ (İkonların alt boşluğuyla hizalar).
+             */}
+              <p className="order-4 hidden lg:order-2 lg:block mx-auto max-w-2xl text-center text-base text-neutral-300 text-shadow-sm font-medium sm:text-lg lg:mx-0 lg:col-span-7 lg:text-left lg:text-xl lg:leading-relaxed lg:self-end lg:pb-4">
               {taglineText}
             </p>
 
@@ -156,7 +160,6 @@ function SocialBtn({
 
 /* === Köşe Çizgileri === */
 function Corner({ pos }: { pos: "tl" | "tr" | "br" | "bl" }) {
-  // Mobilde köşeleri biraz küçülttük ve içe çektik
   const map: Record<string, string> = {
     tl: "left-4 top-4 sm:left-6 sm:top-6 border-l-2 border-t-2",
     tr: "right-4 top-4 sm:right-6 sm:top-6 border-r-2 border-t-2",

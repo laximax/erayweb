@@ -65,7 +65,7 @@ export default function SiteFooter() {
             <FooterCol
               title={lang === "en" ? "Social" : "Sosyal Medya"}
               links={[
-                { label: lang === "en" ? "Instagram" : "İnstagram", href: "https://www.instagram.com/eraytechs/" },
+                { label: lang === "en" ? "Instagram" : "Instagram", href: "https://www.instagram.com/eraytechs/" },
                 { label: lang === "en" ? "Tiktok" : "Tiktok", href: "https://www.tiktok.com/@eraytechs" },
                 { label: "Youtube", href: "https://www.youtube.com/@eraytechs" },
               ]}

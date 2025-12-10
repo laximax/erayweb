@@ -114,7 +114,7 @@ export const dict: Record<Lang, Translations> = {
     benefits: {
       badge: "Partnership Value",
       heading: "Why partner with me?",
-      blurb: "I explain technology with a voice consumers trust.",
+      blurb: "I deliver content with a sincere voice that builds trust with your audience.",
       cards: [
         {
           title: "Viral Potential",
@@ -123,7 +123,7 @@ export const dict: Record<Lang, Translations> = {
         },
         {
           title: "Targeted Reach",
-          desc: "I engage with a qualified community that is tech-savvy, loves innovation, and genuinely trusts my recommendations.",
+          desc: "I appeal to a qualified community that is curious, loves innovation, and values my recommendations.",
           tag: "Brand Safety & Trust",
         },
         {
@@ -147,7 +147,7 @@ export const dict: Record<Lang, Translations> = {
         presets: "PC Optimize Presets",
       }, // ✅ items burada kapandı
       cta: { open: "Open", copy: "Copy Link", copied: "Copied!" },
-      footerText: "All my digital world in one place.", // ✅ items ile kardeş
+      footerText: "© 2025 ErayTechs. All rights reserved.", // ✅ items ile kardeş
     },
 
     footer: {
@@ -164,7 +164,7 @@ export const dict: Record<Lang, Translations> = {
       badge: "Available for Collaboration",
       titlePart1: "Let's Work",
       titlePart2: "Together.",
-      desc: "Reach out for sponsorships, product reviews, or just to say hello.",
+      desc: "Reach out for collaboration, product reviews, or just to say hello.",
       emailLabel: "Email Address",
       copied: "Copied to clipboard!",
       openMail: "Open in Mail App",
@@ -175,8 +175,8 @@ export const dict: Record<Lang, Translations> = {
       verified: "Verified",
       country: "Turkey",
       language: "Turkish / English",
-      category: "Tech & Creator Tools",
-      bio: "I create high impact content focused on technology, digital solutions, AI workflows, and everyday user needs. My communication style is clear, fast, and directly actionable. My goal is to make technology understandable and accessible for everyone while helping brands deliver their message to the right audience.",
+      category: "Tech & Digital Content.",
+      bio: "I produce high impact content focused on technology, digital solutions, AI workflows, and daily user needs. My delivery is clear, fast, and directly actionable. My goal is to connect brands' messages with the right audience by making my content understandable and accessible for everyone.",
       reach: "Monthly Reach",
       cta: "Work with me",
        channels: "Channels",
@@ -259,7 +259,7 @@ export const dict: Record<Lang, Translations> = {
     benefits: {
       badge: "İş Birliği Değeri",
       heading: "Neden benimle çalışmalısın?",
-      blurb: "Teknolojiyi tüketicinin güven duyduğu bir dille anlatıyorum.",
+      blurb: "İçeriklerimi, hedef kitlenizin güven duyduğu samimi bir dille anlatıyorum.",
       cards: [
         {
           title: "Viral Potansiyel",
@@ -268,7 +268,7 @@ export const dict: Record<Lang, Translations> = {
         },
         {
           title: "Doğru Kitle",
-          desc: "Teknolojiye meraklı, yenilikleri seven ve önerilerime değer veren nitelikli bir topluluğa hitap ediyorum.",
+          desc: "Meraklı, yenilikleri seven ve önerilerime değer veren nitelikli bir topluluğa hitap ediyorum.",
           tag: "Marka Güvenliği & İtibar",
         },
         {
@@ -292,7 +292,7 @@ export const dict: Record<Lang, Translations> = {
         presets: "PC Hızlandırma Ayarları",
       }, // ✅ items burada kapandı
       cta: { open: "Aç", copy: "Linki Kopyala", copied: "Kopyalandı!" },
-      footerText: "Tüm dijital dünyam tek bir yerde.", // ✅ items ile kardeş ve Türkçe
+      footerText: "© 2025 ErayTechs. Tüm hakları saklıdır.", // ✅ items ile kardeş ve Türkçe
     },
 
     footer: {
@@ -309,7 +309,7 @@ export const dict: Record<Lang, Translations> = {
       badge: "İş Birlikleri İçin Açık",
       titlePart1: "Birlikte",
       titlePart2: "Çalışalım.",
-      desc: "Sponsorluk, ürün incelemeleri veya sadece merhaba demek için ulaşın.",
+      desc: "İş birliği, ürün incelemeleri veya sadece merhaba demek için ulaşın.",
       emailLabel: "E-posta Adresi",
       copied: "Panoya kopyalandı!",
       openMail: "Mail Uygulamasında Aç",
@@ -320,8 +320,8 @@ export const dict: Record<Lang, Translations> = {
       verified: "Onaylı",
       country: "Türkiye",
       language: "Türkçe / İngilizce",
-      category: "Teknoloji & Creator Araçları",
-      bio: " Teknoloji, dijital çözümler, yapay zeka iş akışları ve günlük kullanıcı ihtiyaçlarına yönelik yüksek etkili içerikler üretiyorum. Anlatımım net, hızlı ve doğrudan uygulanabilir. Hedefim, teknolojiyi herkes için anlaşılır ve erişilebilir kılarak markaların mesajlarını doğru kitleyle buluşturmak.",
+      category: "Teknoloji &  Dijital İçerik.",
+      bio: " Teknoloji, dijital çözümler, yapay zeka iş akışları ve günlük kullanıcı ihtiyaçlarına yönelik yüksek etkili içerikler üretiyorum. Anlatımım net, hızlı ve doğrudan uygulanabilir. Hedefim, içeriklerimi herkes için anlaşılır ve erişilebilir kılarak markaların mesajlarını doğru kitleyle buluşturmak.",
       reach: "Aylık Erişim",
       cta: "Benimle çalış",
        channels: "Kanallar",
