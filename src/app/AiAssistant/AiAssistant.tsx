@@ -61,6 +61,8 @@ export default function AiAssistant() {
   const [status, setStatus] = useState<"intro" | "docked" | "open">("intro");
   const [showTooltip, setShowTooltip] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [introSkipped, setIntroSkipped] = useState(false);
+  const [hasShownWelcome, setHasShownWelcome] = useState(false);
   
   // --- CHAT MANTIĞI İÇİN STATE ---
   const [inputVal, setInputVal] = useState("");
@@ -79,13 +81,63 @@ export default function AiAssistant() {
   // 2. Animasyon Zamanlayıcısı
   useEffect(() => {
     if (!mounted) return;
+
+    const navigationEntry = performance.getEntriesByType("navigation")[0] as
+      | PerformanceNavigationTiming
+      | undefined;
+    const navigationType =
+      navigationEntry?.type ||
+      ((performance as Performance & { navigation?: { type?: number } })
+        .navigation?.type === 1
+        ? "reload"
+        : "navigate");
+
+    const isReload = navigationType === "reload";
+    if (isReload) {
+      sessionStorage.removeItem("novaIntroSeen");
+    }
+
+    const introSeenBefore = sessionStorage.getItem("novaIntroSeen") === "true";
+
+    if (introSeenBefore && !isReload) {
+      requestAnimationFrame(() => {
+        setStatus("docked");
+        setIntroSkipped(true);
+        setHasShownWelcome(true);
+      });
+      return;
+    }
+
+    sessionStorage.setItem("novaIntroSeen", "true");
+    requestAnimationFrame(() => {
+      setStatus("intro");
+      setIntroSkipped(false);
+      setHasShownWelcome(false);
+    });
+  }, [mounted]);
+
+  // 3. Animasyon Zamanlayıcısı
+  useEffect(() => {
+    if (!mounted || status !== "intro") return;
     const timer = setTimeout(() => {
       setStatus("docked");
-      setShowTooltip(true);
-      setTimeout(() => setShowTooltip(false), 5000);
+      
     }, 2500);
     return () => clearTimeout(timer);
-  }, [mounted]);
+  }, [mounted, status]);
+
+   // 4. Tooltip Zamanlayıcısı (sadece intro sonrası)
+  useEffect(() => {
+    if (status !== "docked" || introSkipped || hasShownWelcome) return;
+
+    requestAnimationFrame(() => {
+      setHasShownWelcome(true);
+      setShowTooltip(true);
+    });
+    const tooltipTimer = setTimeout(() => setShowTooltip(false), 5000);
+
+    return () => clearTimeout(tooltipTimer);
+  }, [status, introSkipped, hasShownWelcome]);
 
   // 3. Otomatik Scroll
   useEffect(() => {
@@ -276,10 +328,10 @@ else if (lowerText.includes("güle güle") || lowerText.includes("görüşürüz
           status === "intro"
             ? { left: "50%", top: "40%", x: "-50%", y: "-50%", scale: 1.5, transition: { type: "spring", duration: 2, bounce: 0.3 } }
             : status === "docked"
-           ? { left: "auto", top: "24px", right: "24px", bottom: "auto", x: 0, y: 0, scale: 0.7, transition: { type: "spring", stiffness: 120, damping: 18 } }
-            : { opacity: 0, scale: 0, pointerEvents: "none", right: "24px", top: "24px" }
+               ? { left: "auto", top: "auto", right: "24px", bottom: "24px", x: 0, y: 0, scale: 0.85, transition: { type: "spring", stiffness: 120, damping: 18 } }
+            : { opacity: 0, scale: 0, pointerEvents: "none", right: "24px", bottom: "24px" }
         }
-        whileHover={{ scale: 0.8 }}
+        whileHover={{ scale: 0.9 }}
         style={{ position: "fixed", zIndex: 9999, cursor: "pointer", width: "64px", height: "64px" }}
         onClick={() => status === "docked" && setStatus("open")}
       >

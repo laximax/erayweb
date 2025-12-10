@@ -6,7 +6,7 @@ import { useLang } from "../components/LangProvider";
 
 export default function HeroCard() {
   const { lang } = useLang();
-
+ const taglineText = lang === "en" ? "Technology & Digital Content." : "Teknoloji & Dijital İçerik.";
   return (
     // Mobilde üst boşluğu biraz kıstık (mt-28), büyük ekranda açtık
      <section className="mt-24 sm:mt-32 mb-10 sm:mb-16 lg:mb-20">
@@ -53,8 +53,36 @@ export default function HeroCard() {
                 
             </div>
 
-            {/* Sağ Taraf: Sosyal Medya Butonları */}
-             <div className="order-2 flex items-end justify-center lg:order-3 lg:col-span-5 lg:h-full lg:justify-end lg:pb-4">
+             {/* Mobil: Sosyal ikonlar ve metin bir arada, aradaki boşluk azaltıldı */}
+            <div className="order-2 flex w-full flex-col items-center gap-3 sm:gap-4 lg:hidden">
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+
+                <SocialBtn
+                  href="https://instagram.com/eraytechs"
+                  icon={Instagram}
+                  label="Instagram"
+                />
+
+                <SocialBtn
+                  href="https://tiktok.com/@eraytechs"
+                  icon={TikTokIcon}
+                  label="TikTok"
+                />
+
+                <SocialBtn
+                  href="https://youtube.com/@eraytechs"
+                  icon={Youtube}
+                  label="YouTube"
+                />
+
+              </div>
+              <p className="max-w-2xl text-center text-base text-neutral-300 text-shadow-sm font-medium sm:text-lg">
+                {taglineText}
+              </p>
+            </div>
+
+            {/* Masaüstü: Sosyal medya butonları */}
+            <div className="order-3 hidden items-end justify-center lg:order-3 lg:col-span-5 lg:flex lg:h-full lg:justify-end lg:pb-4">
               <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
                 
                 <SocialBtn
@@ -77,10 +105,8 @@ export default function HeroCard() {
 
               </div>
             </div>
-             <p className="order-3 lg:order-2 mx-auto max-w-2xl text-center text-base text-neutral-300 text-shadow-sm font-medium sm:text-lg lg:mx-0 lg:col-span-7 lg:text-left lg:text-xl lg:leading-relaxed lg:mt-4">
-              {lang === "en"
-                ? "Technology & Digital Content."
-                : "Teknoloji & Dijital İçerik."}
+              <p className="order-4 hidden lg:order-2 lg:block mx-auto max-w-2xl text-center text-base text-neutral-300 text-shadow-sm font-medium sm:text-lg lg:mx-0 lg:col-span-7 lg:text-left lg:text-xl lg:leading-relaxed lg:mt-4">
+              {taglineText}
             </p>
 
           </div>
