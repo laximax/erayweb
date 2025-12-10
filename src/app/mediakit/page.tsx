@@ -70,7 +70,7 @@ function CreatorHero() {
         {/* Sol: Görsel */}
         <div className="relative shrink-0 overflow-hidden rounded-[32px] ring-4 ring-white shadow-xl w-56 h-56 sm:w-72 sm:h-72 md:w-[320px] md:h-[320px]">
           <Image
-            src="/hero.png"
+            src="/eraytechs.png"
             alt="ErayTechs"
             fill
             sizes="(max-width:768px) 80vw, 320px"

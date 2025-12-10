@@ -98,7 +98,7 @@ export default function LinksBoard() {
           <div className="mx-auto max-w-md text-center">
             <div className="relative mx-auto h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-full ring-4 ring-white shadow-lg aspect-square">
               <Image
-                src="/hero.png" // Logoyu buraya koy
+                src="/eraytechs.png" // Logoyu buraya koy
                 alt="ErayTechs"
                 fill
                 sizes="112px"
