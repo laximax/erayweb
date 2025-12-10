@@ -276,8 +276,8 @@ else if (lowerText.includes("güle güle") || lowerText.includes("görüşürüz
           status === "intro"
             ? { left: "50%", top: "40%", x: "-50%", y: "-50%", scale: 1.5, transition: { type: "spring", duration: 2, bounce: 0.3 } }
             : status === "docked"
-            ? { left: "auto", top: "auto", right: "24px", bottom: "30px", x: 0, y: 0, scale: 0.7, transition: { type: "spring", stiffness: 120, damping: 18 } }
-            : { opacity: 0, scale: 0, pointerEvents: "none", right: "24px", bottom: "30px" }
+           ? { left: "auto", top: "24px", right: "24px", bottom: "auto", x: 0, y: 0, scale: 0.7, transition: { type: "spring", stiffness: 120, damping: 18 } }
+            : { opacity: 0, scale: 0, pointerEvents: "none", right: "24px", top: "24px" }
         }
         whileHover={{ scale: 0.8 }}
         style={{ position: "fixed", zIndex: 9999, cursor: "pointer", width: "64px", height: "64px" }}

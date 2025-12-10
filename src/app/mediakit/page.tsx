@@ -37,12 +37,21 @@ function formatCount(n?: number | null) {
 function CreatorHero() {
   const { t } = useLang();
   const [counts, setCounts] = useState<SocialCounts>({});
+  const platformLabels = t.mediakit.platformNames;
 
   useEffect(() => {
+    let cancelled = false;
     fetch("/api/social", { cache: "no-store" })
       .then((r) => r.json())
-      .then((data) => setCounts(data))
+      .then((data) => {
+        if (!cancelled) {
+          setCounts(data);
+        }
+      })
       .catch(() => {});
+      return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
@@ -99,9 +108,9 @@ function CreatorHero() {
           </p>
 
           <div className="mt-6 flex flex-wrap justify-center md:justify-start items-center gap-4 sm:gap-6">
-            <Stat icon={<TikTokIcon className="h-4 w-4" />} label="TikTok" value={formatCount(counts.tiktok)} />
-            <Stat icon={<Instagram className="h-4 w-4" />} label="Instagram" value={formatCount(counts.instagram)} />
-            <Stat icon={<Youtube className="h-4 w-4" />} label="YouTube" value={formatCount(counts.youtube)} />
+            <Stat icon={<TikTokIcon className="h-4 w-4" />} label={platformLabels.tiktok} value={formatCount(counts.tiktok)} />
+            <Stat icon={<Instagram className="h-4 w-4" />} label={platformLabels.instagram} value={formatCount(counts.instagram)} />
+            <Stat icon={<Youtube className="h-4 w-4" />} label={platformLabels.youtube} value={formatCount(counts.youtube)} />
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white transition hover:bg-black/90"
@@ -265,22 +274,25 @@ function fmtDuration(sec?: number) {
 
 function ChannelsSection() {
   // ✅ lang eklendi
-  const { t, lang } = useLang();
+  const { t } = useLang();
   const [tab, setTab] = useState<PlatformKey>("tiktok");
   const d = DATA[tab];
+  const platformLabels = t.mediakit.platformNames;
 
-  const avgViewsLabel = tab === "instagram" ? "Avg Reels Views" : "Avg Video Views";
+  const tabLabel = platformLabels[tab];
+
+  const avgViewsLabel = tab === "instagram" ? t.mediakit.avgReelsViews : t.mediakit.avgVideoViews;
 
   return (
     <section className="mx-auto mt-12 w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-      <h2 className="text-2xl sm:text-3xl font-semibold text-center sm:text-left">Channels</h2>
+      <h2 className="text-2xl sm:text-3xl font-semibold text-center sm:text-left">{t.mediakit.channels}</h2>
 
       {/* Tabs */}
      <div className="mt-4 flex flex-wrap items-center gap-3 border-b border-neutral-200 pb-4">
         <div className="flex flex-wrap items-center gap-3">
-          <Tab active={tab === "tiktok"} onClick={() => setTab("tiktok")} icon={<TikTokIcon className="h-4 w-4" />} label="TikTok" badge={DATA.tiktok.badge} />
-          <Tab active={tab === "instagram"} onClick={() => setTab("instagram")} icon={<Instagram className="h-4 w-4" />} label="Instagram" badge={DATA.instagram.badge} />
-          <Tab active={tab === "youtube"} onClick={() => setTab("youtube")} icon={<Youtube className="h-4 w-4" />} label="YouTube" badge={DATA.youtube.badge} />
+         <Tab active={tab === "tiktok"} onClick={() => setTab("tiktok")} icon={<TikTokIcon className="h-4 w-4" />} label={platformLabels.tiktok} badge={DATA.tiktok.badge} />
+          <Tab active={tab === "instagram"} onClick={() => setTab("instagram")} icon={<Instagram className="h-4 w-4" />} label={platformLabels.instagram} badge={DATA.instagram.badge} />
+          <Tab active={tab === "youtube"} onClick={() => setTab("youtube")} icon={<Youtube className="h-4 w-4" />} label={platformLabels.youtube} badge={DATA.youtube.badge} />
         </div>
         <div className="flex w-full flex-col gap-2 sm:ml-auto sm:w-auto sm:flex-row sm:items-center">
           <a
@@ -288,7 +300,7 @@ function ChannelsSection() {
             target="_blank"
             className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm transition hover:bg-neutral-100 sm:w-auto"
           >
-            Go to {cap(tab)} ↗
+            {t.mediakit.goTo(tabLabel)}
           </a>
           <a
             href={MEDIA_KIT_PDF_PATH}
@@ -297,8 +309,8 @@ function ChannelsSection() {
             aria-label="Download Media Kit as PDF"
           >
             <FileDown className="h-4 w-4" />
-            <span className="hidden sm:inline">Download Media Kit (PDF)</span>
-            <span className="sm:hidden">Media Kit PDF</span>
+            <span className="hidden sm:inline">{t.mediakit.downloadPdf}</span>
+            <span className="sm:hidden">{t.mediakit.downloadPdfShort}</span>
           </a>
         </div>
       </div>
@@ -309,10 +321,7 @@ function ChannelsSection() {
          {/* ✅ YENİ EKLENEN PROFESYONEL BİLGİ SATIRI */}
          <p className="mt-1.5 inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-neutral-500 bg-neutral-50 px-2 py-1 rounded-md border border-neutral-100">
             <Clock className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-neutral-400" />
-            {lang === 'en' 
-               ? "Data automatically updates weekly. Last Sync: Dec 09, 2025 • 22:50" 
-               : "Veriler haftalık olarak otomatik güncellenir. Son Eşitleme: 09.12.2025 • 22:50"
-            }
+            {t.mediakit.dataRefresh}
          </p>
       </div>
 
@@ -325,16 +334,16 @@ function ChannelsSection() {
         <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
           <StatCard title={t.mediakit?.followers ?? "Followers"} value={fmt(d.stats.followers)} />
           <StatCard title={t.mediakit?.posts ?? "Posts"} value={d.stats.videos?.toString() ?? "—"} />
-          <StatCard title="Total Views" value={d.stats.totalViews ? fmt(d.stats.totalViews) : "—"} />
-          <StatCard title="Avg Post Impressions" value={d.stats.avgPostImpressions ? fmt(d.stats.avgPostImpressions) : "—"} />
-          <StatCard title="Post Engagement Rate" value={d.stats.postEngagementRate != null ? `${d.stats.postEngagementRate.toFixed(2)}%` : "—"} />
-          <StatCard title="Avg Reels Views" value={d.stats.avgReelsViews ? fmt(d.stats.avgReelsViews) : "—"} />
+        <StatCard title={t.mediakit.totalViews} value={d.stats.totalViews ? fmt(d.stats.totalViews) : "—"} />
+          <StatCard title={t.mediakit.avgPostImpressions} value={d.stats.avgPostImpressions ? fmt(d.stats.avgPostImpressions) : "—"} />
+          <StatCard title={t.mediakit.postEngagementRate} value={d.stats.postEngagementRate != null ? `${d.stats.postEngagementRate.toFixed(2)}%` : "—"} />
+          <StatCard title={t.mediakit.avgReelsViews} value={d.stats.avgReelsViews ? fmt(d.stats.avgReelsViews) : "—"} />
         </div>
       ) : (
         <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
           <StatCard title={t.mediakit?.followers ?? "Followers"} value={fmt(d.stats.followers)} />
           <StatCard title={t.mediakit?.posts ?? "Posts"} value={d.stats.videos?.toString() ?? "—"} />
-          <StatCard title="Total Views" value={d.stats.totalViews ? fmt(d.stats.totalViews) : "—"} />
+           <StatCard title={t.mediakit.totalViews} value={d.stats.totalViews ? fmt(d.stats.totalViews) : "—"} />
           <StatCard title={avgViewsLabel} value={d.stats.avgReelsViews ? fmt(d.stats.avgReelsViews) : "—"} />
           <StatCard title={t.mediakit?.engagementRate ?? "Engagement Rate"} value={d.stats.engagementRate != null ? `${d.stats.engagementRate.toFixed(2)}%` : "—"} />
           <StatCard title={t.mediakit?.avgDuration ?? "Avg Duration"} value={fmtDuration(d.stats.avgDurationSec)} />
@@ -430,9 +439,7 @@ function Donut({ male, female }: { male: number; female: number }) {
   );
 }
 
-function cap(s: string) {
-  return s.slice(0, 1).toUpperCase() + s.slice(1);
-}
+
 
 /* ================ CONTACT CTA FOOTER ================ */
 

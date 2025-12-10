@@ -56,6 +56,18 @@ export type Translations = {
     reach: string;
     cta: string;
 
+    channels: string;
+    platformNames: { tiktok: string; instagram: string; youtube: string };
+    goTo: (platform: string) => string;
+    downloadPdf: string;
+    downloadPdfShort: string;
+    totalViews: string;
+    avgPostImpressions: string;
+    postEngagementRate: string;
+    avgReelsViews: string;
+    avgVideoViews: string;
+    dataRefresh: string;
+
     meet: string;
     meetText: string;
     offerTitle: string;
@@ -167,6 +179,21 @@ export const dict: Record<Lang, Translations> = {
       bio: "I create high impact content focused on technology, digital solutions, AI workflows, and everyday user needs. My communication style is clear, fast, and directly actionable. My goal is to make technology understandable and accessible for everyone while helping brands deliver their message to the right audience.",
       reach: "Monthly Reach",
       cta: "Work with me",
+       channels: "Channels",
+      platformNames: {
+        tiktok: "TikTok",
+        instagram: "Instagram",
+        youtube: "YouTube",
+      },
+      goTo: (platform: string) => `Go to ${platform} ↗`,
+      downloadPdf: "Download Media Kit (PDF)",
+      downloadPdfShort: "Media Kit PDF",
+      totalViews: "Total Views",
+      avgPostImpressions: "Avg Post Impressions",
+      postEngagementRate: "Post Engagement Rate",
+      avgReelsViews: "Avg Reels Views",
+      avgVideoViews: "Avg Video Views",
+      dataRefresh: "Data automatically updates weekly. Last Sync: Dec 09, 2025 • 22:50",
 
       meet: "MEET THE CREATOR",
       meetText:
@@ -297,6 +324,21 @@ export const dict: Record<Lang, Translations> = {
       bio: " Teknoloji, dijital çözümler, yapay zeka iş akışları ve günlük kullanıcı ihtiyaçlarına yönelik yüksek etkili içerikler üretiyorum. Anlatımım net, hızlı ve doğrudan uygulanabilir. Hedefim, teknolojiyi herkes için anlaşılır ve erişilebilir kılarak markaların mesajlarını doğru kitleyle buluşturmak.",
       reach: "Aylık Erişim",
       cta: "Benimle çalış",
+       channels: "Kanallar",
+      platformNames: {
+        tiktok: "TikTok",
+        instagram: "Instagram",
+        youtube: "YouTube",
+      },
+      goTo: (platform: string) => `${platform} sayfasına git ↗`,
+      downloadPdf: "Medya Kitini İndir (PDF)",
+      downloadPdfShort: "Medya Kiti PDF",
+      totalViews: "Toplam İzlenme",
+      avgPostImpressions: "Gönderi Başına Ortalama Erişim",
+      postEngagementRate: "Gönderi Etkileşim Oranı",
+      avgReelsViews: "Reels Ortalama İzlenme",
+      avgVideoViews: "Video Ortalama İzlenme",
+      dataRefresh: "Veriler haftalık olarak otomatik güncellenir. Son Eşitleme: 09.12.2025 • 22:50",
 
       meet: "CREATOR İLE TANIŞ",
       meetText:
@@ -334,7 +376,7 @@ export const dict: Record<Lang, Translations> = {
       avgDuration: "Ort. Süre",
       engagementRate: "Etkileşim Oranı",
 
-      audience: "Audience",
+      audience: "Kitle",
       location: "Lokasyon",
       age: "Yaş",
       gender: "Cinsiyet",
