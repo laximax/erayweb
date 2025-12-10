@@ -1,5 +1,5 @@
 import TopNavPill from "../components/TopNavPill";
-import AiAssistant from "../AiAssistant/AiAssistant";
+
 
 export const metadata = {
   title: "Contact – ErayTechs",
@@ -11,7 +11,7 @@ export default function ContactLayout({ children }: { children: React.ReactNode 
     <>
       <TopNavPill />   {/* sadece /contact’ta görünür */}
       {children}
-       <AiAssistant />
+       
     </>
   );
 }
